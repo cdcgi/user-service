@@ -25,7 +25,7 @@ is a service to manage users and privileges. Main feature are authority with acc
 - [ ] Main Dealers
 - [ ] Companies
 - [ ] Regions
-- [ ] Branchs
+- [ ] Branches
 - [ ] kios
 
 ## Get Started
