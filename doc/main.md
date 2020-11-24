@@ -2,7 +2,7 @@
 
 ## Auth
 Module | HTTP Method | URL | Description 
---- | ---
+--- | --- | --- | ---
 [Login](#login) | POST | /login | Login API
 Forgot Password | POST | /forgot-password | Forgot Password API
 Change Password | POST | /change-password | Change Password API
@@ -15,7 +15,7 @@ POST /login
 
 ### Headers
 Key | Value 
---- | --- | ---
+--- | ---
 Content-Type | application/json
 Accept | application/json
 
