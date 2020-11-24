@@ -12,8 +12,9 @@ Module | HTTP Method | URL | Description
 POST /login
 
 ### Database
-![](./table-users.jpg)
+![](./acl-layer.png)
 
+For login, you need get users by username and password (see users table). And for access response payload, you need get acos data which grant to users.
 
 *if need create new database, please write the sql script below* 
 
