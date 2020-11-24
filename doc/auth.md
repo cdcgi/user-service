@@ -14,6 +14,7 @@ POST /login
 ### Database
 ![](./table-users.jpg)
 
+
 *if need create new database, please write the sql script below* 
 
 ### Headers
@@ -69,7 +70,7 @@ HTTP Code | Status | Description
 
 ### Logic
 
-*if any special logic, please write down the logic here*
+* if any special logic, please write down the logic here *
 
 ### Scenario Test
 
@@ -146,7 +147,7 @@ Response Payload :
 }
 ```
 
-### Case : Negative Case 5
+#### Case : Negative Case 5
 
 Request Payload :
 ```
@@ -167,7 +168,7 @@ Response Payload:
 }
 ```
 
-### Case : Negative Case 6
+#### Case : Negative Case 6
 
 Request Payload
 ```
@@ -188,7 +189,7 @@ Response Payload
 }
 ```
 
-### Case : Positive Case
+#### Case : Positive Case
 
 Request Payload :
 ```
