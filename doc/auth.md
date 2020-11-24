@@ -70,7 +70,7 @@ HTTP Code | Status | Description
 
 ### Logic
 
-* if any special logic, please write down the logic here *
+*if any special logic, please write down the logic here*
 
 ### Scenario Test
 
