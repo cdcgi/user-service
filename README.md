@@ -22,7 +22,7 @@ is a service to manage users and privileges. Main feature are authority with acc
 - [ ] Access Controller List
 - [ ] Users
 - [ ] Groups
-- [ ] Main Dealers
+- [ ] Employees
 - [ ] Companies
 - [ ] Regions
 - [ ] Branches
