@@ -75,9 +75,7 @@ HTTP Code | Status | Description
 - username : required and not empty
 - password: required and not empty
 
-
-
-*if any special logic, please write down the logic here. thanks*
+*if any special logic, please write down the logic here*
 
 
 ### Scenario Test
@@ -238,8 +236,6 @@ POST /forgot-password
 ### Endpoint
 POST /change-password
 
-<<<<<<< HEAD
-=======
 ![](./user_layer.png)
 
 
@@ -512,13 +508,10 @@ Response Payload :
 }
 ```
 
->>>>>>> [#9] update change password and reset password documentation
 ## <a name="reset-password"></a>Reset Password
 
 ### Endpoint
 POST /reset-password
-<<<<<<< HEAD
-=======
 
 ![](./forgot_password_layer.png)
 
@@ -767,4 +760,3 @@ Response Payload :
     }
 }
 ```
->>>>>>> [#9] update change password and reset password documentation
