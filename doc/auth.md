@@ -233,15 +233,11 @@ Response Payload :
 POST /forgot-password
 
 ## <a name="change-password"></a>Change Password
-<<<<<<< HEAD
 
 ### Endpoint
 POST /change-password
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
+
 ![](./user_layer.png)
 
 
@@ -497,23 +493,12 @@ Request Payload :
 ```
 
 Response HTTP Status Code : 200
-=======
->>>>>>> [#9] resolve conflict
 
-### Endpoint
-POST /change-password
-
->>>>>>> [#9] update change password and reset password documentation
->>>>>>> [#9] resolve conflict
 ## <a name="reset-password"></a>Reset Password
 
 ### Endpoint
 POST /reset-password
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 
 ![](./forgot_password_layer.png)
 
@@ -762,7 +747,3 @@ Response Payload :
     }
 }
 ```
->>>>>>> [#9] update change password and reset password documentation
-=======
->>>>>>> [#9] resolve conflict
->>>>>>> [#9] resolve conflict
