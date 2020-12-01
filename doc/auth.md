@@ -230,6 +230,194 @@ Response Payload :
 ### Endpoint
 POST /forgot-password
 
+For recycle your password, you need to input your username and email for sending an password recovery to your email.
+
+### Headers
+Key | Value 
+--- | ---
+Content-Type | application/json
+Accept | application/json
+
+### Request Payloads
+Name | Type | Example Value
+--- | --- | ---
+username | string | jacky  
+email | string | jacky@gmail.com
+```
+{
+    "username": "jacky",
+    "email": "jacky@gmail.com"
+}
+```
+### Response Payloads
+HTTP Code | Status | Description
+--- | --- | ---
+400 | Bad Request | Bad request payload  
+404 | Not Found | User not found in database  
+500 | Internal Server Error | some un-handle error in server 
+200 | Password recovery was sended to your email. please checked your email. | Password recovery was sended to your email. please checked your email.
+```
+{
+    "status_code": "CDC-400",
+    "status_message": "Bad Request",
+    "data": null
+}
+```
+
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "Password recovery was sended to your email. please checked your email. ",
+    "data": null
+}
+```
+
+### Logic
+*if any special logic, please write down the logic here. thanks*
+#### Validation
+- username : required and not empty
+- email: required and not empty
+
+
+
+### Scenario Test
+
+#### Case : Negative Case 1
+
+Request Payload : empty
+
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "username is required",
+    "data": null
+}
+```
+
+#### Case : Negative Case 2
+
+Request Payload :
+```
+{}
+```
+
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "username is required",
+    "data": null
+}
+```
+
+#### Case : Negative Case 3
+
+Request payload :
+```
+{
+    "username": ""
+}
+```
+
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "username is empty",
+    "data": null
+}
+```
+
+#### Case : Negative Case 4
+
+Request Payload :
+```
+{
+    "username": "asal"
+}
+```
+
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "email is required",
+    "data": null
+}
+```
+
+#### Case : Negative Case 5
+
+Request Payload :
+```
+{
+    "username": "asal",
+    "email": ""
+}
+```
+ 
+Response HTTP Status Code : 400
+
+Response Payload:
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "email is empty",
+    "data": null
+}
+```
+
+#### Case : Negative Case 6
+
+Request Payload
+```
+{
+    "username": "asal",
+    "email": "asal"
+}
+```
+
+Response HTTP Status Code : 404
+
+Response Payload
+```
+{
+    "status_code": "cdc-404",
+    "status_message": "Invalid username/email",
+    "data": null
+}
+```
+
+#### Case : Positive Case
+
+Request Payload :
+```
+{
+    "username": "jacky",
+    "email": "jacky@gmail.com"
+}
+```
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "Password recovery was sended to your email. please checked your email. ",
+    "data": null
+}
+```
+
 ## <a name="change-password"></a>Change Password
 
 ### Endpoint
