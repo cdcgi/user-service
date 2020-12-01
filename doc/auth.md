@@ -230,6 +230,9 @@ Response Payload :
 ### Endpoint
 POST /forgot-password
 
+![](./forgot_password_layer.png)
+
+
 For recycle your password, you need to input your email for sending password recovery to your email.
 
 ### Headers
@@ -271,7 +274,12 @@ HTTP Code | Status | Description
 ```
 
 ### Logic
-*if any special logic, please write down the logic here. thanks*
+
+1. Validate email input.
+2. Store the link forgot password to forgot_password_temps table.
+3. Send email reset password link to user.
+
+
 #### Validation
 - email: required, using email pattern, and not empty
 
