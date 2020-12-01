@@ -230,7 +230,7 @@ Response Payload :
 ### Endpoint
 POST /forgot-password
 
-For recycle your password, you need to input your username and email for sending an password recovery to your email.
+For recycle your password, you need to input your email for sending password recovery to your email.
 
 ### Headers
 Key | Value 
@@ -241,11 +241,9 @@ Accept | application/json
 ### Request Payloads
 Name | Type | Example Value
 --- | --- | ---
-username | string | jacky  
 email | string | jacky@gmail.com
 ```
 {
-    "username": "jacky",
     "email": "jacky@gmail.com"
 }
 ```
@@ -275,8 +273,7 @@ HTTP Code | Status | Description
 ### Logic
 *if any special logic, please write down the logic here. thanks*
 #### Validation
-- username : required and not empty
-- email: required and not empty
+- email: required, using email pattern, and not empty
 
 
 
@@ -292,7 +289,7 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "username is required",
+    "status_message": "email is required",
     "data": null
 }
 ```
@@ -310,7 +307,7 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "username is required",
+    "status_message": "email is required",
     "data": null
 }
 ```
@@ -320,7 +317,7 @@ Response Payload :
 Request payload :
 ```
 {
-    "username": ""
+    "email": ""
 }
 ```
 
@@ -330,7 +327,7 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "username is empty",
+    "status_message": "email is empty",
     "data": null
 }
 ```
@@ -340,7 +337,7 @@ Response Payload :
 Request Payload :
 ```
 {
-    "username": "asal"
+    "email": "asal"
 }
 ```
 
@@ -350,39 +347,18 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "email is required",
+    "status_message": "email format is invalid",
     "data": null
 }
 ```
+
 
 #### Case : Negative Case 5
-
-Request Payload :
-```
-{
-    "username": "asal",
-    "email": ""
-}
-```
- 
-Response HTTP Status Code : 400
-
-Response Payload:
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "email is empty",
-    "data": null
-}
-```
-
-#### Case : Negative Case 6
 
 Request Payload
 ```
 {
-    "username": "asal",
-    "email": "asal"
+    "email": "asal@gmail.com"
 }
 ```
 
@@ -392,7 +368,7 @@ Response Payload
 ```
 {
     "status_code": "cdc-404",
-    "status_message": "Invalid username/email",
+    "status_message": "email not found",
     "data": null
 }
 ```
@@ -402,7 +378,6 @@ Response Payload
 Request Payload :
 ```
 {
-    "username": "jacky",
     "email": "jacky@gmail.com"
 }
 ```
