@@ -632,3 +632,179 @@ Response Payload :
 
 ### Endpoint
 POST /reset-password
+
+
+for resetting your password with a new password
+
+
+### Headers
+Key | Value 
+--- | ---
+Content-Type | application/json
+Accept | application/json
+
+### Request Payloads
+Name | Type | Example Value
+--- | --- | ---
+token | string | c4ca4238a0b923820dcc509a6f75849b
+new_password | string | jakaRTa!2021
+re_new_password | string | jakaRTa!2021
+```
+{
+    "token": "c4ca4238a0b923820dcc509a6f75849b",
+    "new_password": "jakaRTa!2021",
+    "re_new_password": "jakaRTa!2021",
+}
+```
+### Response Payloads
+HTTP Code | Status | Description
+--- | --- | ---
+400 | Bad Request | Bad request payload  
+404 | Not Found | User not found in database  
+500 | Internal Server Error | some un-handle error in server 
+200 | Success change password | Success change password
+```
+{
+    "status_code": "CDC-400",
+    "status_message": "Bad Request",
+    "data": null
+}
+```
+
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "Success change password.",
+    "data": null
+}
+```
+
+### Logic
+
+1. Validate new password input.
+2. matching new password with re new password.
+3. if match, change password on database with new password
+
+
+#### Validation
+- new password: required and not empty 
+- re new password: required and not empty 
+
+
+### Scenario Test
+
+#### Case : Negative Case 1
+
+Request Payload : empty
+
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "new password is required",
+    "data": null
+}
+```
+
+#### Case : Negative Case 2
+
+Request Payload :
+```
+{}
+```
+
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "new password is required",
+    "data": null
+}
+```
+
+#### Case : Negative Case 3
+
+Request payload :
+```
+{
+    "new_password": ""
+}
+```
+
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "new password is empty",
+    "data": null
+}
+```
+
+#### Case : Negative Case 4
+
+Request Payload :
+```
+{
+    "new_password": "asal"
+}
+```
+
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "new password is weak",
+    "data": null
+}
+```
+
+#### Case : Negative Case 5
+
+Request Payload :
+```
+{
+    "new_password": "jakaRTa!2020",
+    "re_new_password": "asal"
+}
+```
+
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "new password did not match",
+    "data": null
+}
+```
+
+
+#### Case : Positive Case
+
+Request Payload :
+```
+{
+    "new_password": "jakaRTa!2021",
+    "re_new_password": "jakaRTa!2021"
+}
+```
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "success change password",
+    "data": null
+}
+```
