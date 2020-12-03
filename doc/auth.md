@@ -661,21 +661,8 @@ Request Payload :
 
 Response HTTP Status Code : 200
 
-Response Payload :
-```
-{
-    "status_code": "CDC-200",
-    "status_message": "success change password",
-    "data": {
-        "user": {
-          "id": 1,
-          "name": "Jacky Chan",
-          "username": "jacky",
-          "email": "jacky@gmail.com",
-        }
-    }
-}
-```
+### Endpoint
+POST /change-password
 
 ## <a name="reset-password"></a>Reset Password
 
