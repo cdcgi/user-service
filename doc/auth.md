@@ -417,17 +417,16 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
+Email | application/json
 
 ### Request Payloads
 Name | Type | Example Value
 --- | --- | ---
-user_id | string | 1
 old_password | string | jakaRTa!2020
 new_password | string | jakaRTa!2021
 re_new_password | string | jakaRTa!2021
 ```
 {
-    "user_id : 1,
     "old_password": "jakaRTa!2020",
     "new_password": "jakaRTa!2021",
     "re_new_password": "jakaRTa!2021",
@@ -468,13 +467,12 @@ HTTP Code | Status | Description
 
 1. Validate old password, new password input.
 2. matching new password with re new password.
-3. check if user_id exist in database and get password from database based on user_id
+3. check if email exist in database and get password from database based on email
 4. compare old password with password on database
 5. change password on database with new password
 
 
 #### Validation
-- user id: required and not empty
 - old password: required and not empty
 - new password: required and not empty 
 - re new password: required and not empty 
@@ -490,13 +488,13 @@ HTTP Code | Status | Description
 
 Request Payload : empty
 
-Response HTTP Status Code : 404
+Response HTTP Status Code : 400
 
 Response Payload :
 ```
 {
-    "status_code": "cdc-404",
-    "status_message": "user not found",
+    "status_code": "cdc-400",
+    "status_message": "old password is required",
     "data": null
 }
 ```
@@ -506,45 +504,6 @@ Response Payload :
 Request Payload :
 ```
 {}
-```
-
-Response HTTP Status Code : 404
-
-Response Payload :
-```
-{
-    "status_code": "cdc-404",
-    "status_message": "user not found",
-    "data": null
-}
-```
-
-#### Case : Negative Case 3
-
-Request payload :
-```
-{
-    "user_id": "asal"
-}
-```
-
-Response HTTP Status Code : 404
-
-Response Payload :
-```
-{
-    "status_code": "cdc-404",
-    "status_message": "user not found",
-    "data": null
-}
-```
-#### Case : Negative Case 4
-
-Request payload :
-```
-{
-    "user_id": 1
-}
 ```
 
 Response HTTP Status Code : 400
@@ -558,12 +517,33 @@ Response Payload :
 }
 ```
 
-#### Case : Negative Case 5
+
+#### Case : Negative Case 3
 
 Request Payload :
 ```
 {
-    "user_id": 1
+    "old_password": ""
+}
+```
+
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "old password is empty",
+    "data": null
+}
+```
+
+
+#### Case : Negative Case 4
+
+Request Payload :
+```
+{
     "old_password": "asal"
 }
 ```
@@ -579,12 +559,11 @@ Response Payload :
 }
 ```
 
-#### Case : Negative Case 6
+#### Case : Negative Case 5
 
 Request Payload :
 ```
 {
-    "user_id": 1
     "old_password": "jakaRTa!2020",
     "new_password": "asal"
 }
@@ -601,12 +580,11 @@ Response Payload :
 }
 ```
 
-#### Case : Negative Case 7
+#### Case : Negative Case 6
 
 Request Payload :
 ```
 {
-    "user_id": 1
     "old_password": "jakaRTa!2020",
     "new_password": "jakaRTa!2021",
     "re_new_password": "asal"
@@ -624,12 +602,11 @@ Response Payload :
 }
 ```
 
-#### Case : Negative Case 8
+#### Case : Negative Case 7
 
 Request Payload
 ```
 {
-    "user_id": 1
     "old_password": "asal",
     "new_password": "jakaRTa!2020",
     "re_new_password": "jakaRTa!2020"
@@ -653,7 +630,6 @@ Response Payload
 Request Payload :
 ```
 {
-    "user_id": 1
     "old_password": "jakaRTa!2020",
     "new_password": "jakaRTa!2021",
     "re_new_password": "jakaRTa!2021"
