@@ -19,7 +19,7 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | application/json
+Email | alamat.emailku@email.com
 
 ### Request Payloads
 Name | Type | Example Value
@@ -36,8 +36,7 @@ name | string | Auto Moro Dewe
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
-400 | Bad Request | Bad request payload  
-404 | Not Found | Region not found in database  
+400 | Bad Request | Bad request payload
 500 | Internal Server Error | some un-handle error in server 
 201 | Created | Created
 ```
@@ -225,7 +224,7 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | application/json
+Email | alamat.emailku@email.com
 
 ### Response Payloads
 HTTP Code | Status | Description
@@ -283,7 +282,7 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | application/json
+Email | alamat.emailku@email.com
 
 ### Request Payloads
 Name | Type | Example Value
@@ -495,7 +494,7 @@ Key | Value
 --- | ---
 Content-Type | *
 Accept | application/json
-Email | application/json
+Email | alamat.emailku@email.com
 
 ### Response Payloads
 HTTP Code | Status | Description
@@ -504,25 +503,8 @@ HTTP Code | Status | Description
 500 | Internal Server Error | some un-handle error in server 
 204 | No content | No content
 
-```
-{
-    "status_code": "CDC-204",
-    "status_message": "No content",
-    "data": null
-}
-```
-
 ### Scenario Test
 
 #### Case : Positive Case
 
 Response HTTP Status Code : 204
-
-Response Payload :
-```
-{
-    "status_code": "CDC-204",
-    "status_message": "No content",
-    "data": null
-}
-```
