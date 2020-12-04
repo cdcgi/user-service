@@ -58,7 +58,7 @@ HTTP Code | Status | Description
         "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
-        "modified" : "2020-12-02 09:03:44",
+        "modified" : "2020-12-02 09:03:44"
     }
 }
 ```
@@ -66,7 +66,7 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Validation
-- region_code : required and not empty
+- region_code : required, not empty, and must be unique
 - name: required and not empty
 
 ### Scenario Test
@@ -209,7 +209,7 @@ Response Payload :
         "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
-        "modified" : "2020-12-02 09:03:44",
+        "modified" : "2020-12-02 09:03:44"
     }
 }
 ```
@@ -244,7 +244,7 @@ HTTP Code | Status | Description
         "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
-        "modified" : "2020-12-02 09:03:44",
+        "modified" : "2020-12-02 09:03:44"
     }
 }
 ```
@@ -267,7 +267,7 @@ Response Payload :
         "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
-        "modified" : "2020-12-02 09:03:44",
+        "modified" : "2020-12-02 09:03:44"
     }
 }
 ```
@@ -322,7 +322,7 @@ HTTP Code | Status | Description
         "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
-        "modified" : "2020-12-02 09:03:44",
+        "modified" : "2020-12-02 09:03:44"
     }
 }
 ```
@@ -330,7 +330,7 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Validation
-- region_code : not empty and unique
+- region_code : not empty and must be unique
 - name : not empty
 
 ### Scenario Test
@@ -451,7 +451,7 @@ Response Payload :
         "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
-        "modified" : "2020-12-02 10:03:44",
+        "modified" : "2020-12-02 10:03:44"
     }
 }
 ```
@@ -461,7 +461,7 @@ Response Payload :
 Request Payload :
 ```
 {
-    "name": "Monggo Moro Tumbas",
+    "name": "Monggo Moro Tumbas"
 }
 ```
 
@@ -479,7 +479,7 @@ Response Payload :
         "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
-        "modified" : "2020-12-02 10:03:44",
+        "modified" : "2020-12-02 10:03:44"
     }
 }
 ```
