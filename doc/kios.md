@@ -21,6 +21,7 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
+Email  | application/json
 
 ### Request Payloads
 Name | Type | Example Value
@@ -32,7 +33,7 @@ branch_code | string | mandala
 ```
 {
     "kios_name": "mandala",
-    "address": "jl. bekasi timur raya no. 159 A"
+    "address": "jl. bekasi timur raya no. 159 A",
     "branches": [
         {
             "branch_code": "02629"
@@ -44,10 +45,12 @@ branch_code | string | mandala
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
-400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
+400 | Bad Request | bad request payload  
+404 | Not Found | branch not found in database
+403 | Forbidden | branch_code is not owned by user login
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
+201 | Created | add data kios
 ```
 {
     "status_code": "CDC-400",
@@ -78,7 +81,7 @@ HTTP Code | Status | Description
 #### Validation
 - kios_name     : required and not empty
 - address       : required and not empty
-- branch_code   : required and not empty
+- branch_code   : required and not empty, owned by user login
 
 ### Scenario Test
 
@@ -124,12 +127,12 @@ Request payload :
 }
 ```
 
-Response HTTP Status Code : 404
+Response HTTP Status Code : 400
 
 Response Payload :
 ```
 {
-    "status_code": "cdc-404",
+    "status_code": "cdc-400",
     "status_message": "kios_name is empty",
     "data": null
 }
@@ -165,12 +168,12 @@ Request Payload :
 }
 ```
  
-Response HTTP Status Code : 404
+Response HTTP Status Code : 400
 
 Response Payload :
 ```
 {
-    "status_code": "cdc-404",
+    "status_code": "cdc-400",
     "status_message": "address is empty",
     "data": null
 }
@@ -208,12 +211,12 @@ Request Payload :
 }
 ```
  
-Response HTTP Status Code : 404
+Response HTTP Status Code : 400
 
 Response Payload :
 ```
 {
-    "status_code": "cdc-404",
+    "status_code": "cdc-400",
     "status_message": "branch_code is empty",
     "data": null
 }
@@ -230,13 +233,35 @@ Request Payload :
 }
 ```
  
-Response HTTP Status Code : 400
+Response HTTP Status Code : 404
 
 Response Payload:
 ```
 {
-    "status_code": "cdc-400",
+    "status_code": "cdc-404",
     "status_message": "branch_code is not found",
+    "data": null
+}
+```
+
+#### Case : Negative Case 9
+
+Request Payload :
+```
+{
+    "kios_name": "mandala",
+    "address": "jl. bekasi timur raya no. 159 A",
+    "branch_code": "0001"
+}
+```
+
+Response HTTP Status Code : 403
+
+Response Payload :
+```
+{
+    "status_code": "cdc-403",
+    "status_message": "branch_code is not owned by user login",
     "data": null
 }
 ```
@@ -283,18 +308,17 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
+Email | application/json
 
 ### Request Payloads
 Name | Type | Example Value
 --- | --- | ---
-id | string | 1 
 kios_name | string | mandala  
 address | string | bekasi timur raya no. 159 A
 branch_code | string | 02629
 
 ```
 {
-    "id": 1,
     "kios_name": "mandala",
     "address": "bekasi timur raya no. 159 A",
     "branch_code": "02629"
@@ -305,7 +329,8 @@ branch_code | string | 02629
 HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
+404 | Not Found | Kios not found in database  
+403 | Forbidden | branch_code is not owned by user login
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
 ```
@@ -336,10 +361,9 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Validation
-- id            : required and not empty
 - kios_name     : not empty
 - address       : not empty
-- branch_code   : required and not empty
+- branch_code   : required and not empty, owned by user login
 
 ### Scenario Test
 
@@ -353,7 +377,7 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "id is required",
+    "status_message": "kios_name is required",
     "data": null
 }
 ```
@@ -371,32 +395,12 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "id is required",
+    "status_message": "kios_name is required",
     "data": null
 }
 ```
 
 #### Case : Negative Case 3
-
-Request payload :
-```
-{
-    "id": ""
-}
-```
-
-Response HTTP Status Code : 404
-
-Response Payload :
-```
-{
-    "status_code": "cdc-404",
-    "status_message": "id is empty",
-    "data": null
-}
-```
-
-#### Case : Negative Case 4
 
 Request Payload :
 ```
@@ -411,7 +415,27 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "id not found",
+    "status_message": "address is required",
+    "data": null
+}
+```
+
+#### Case : Negative Case 4
+
+Request Payload :
+```
+{
+    "kios_name": ""
+}
+```
+ 
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-400",
+    "status_message": "kios_name is empty",
     "data": null
 }
 ```
@@ -421,18 +445,18 @@ Response Payload :
 Request Payload :
 ```
 {
-    "id": "1",
-    "kios_name": ""
+    "kios_name": "kalimantan"
+    "address": ""
 }
 ```
  
-Response HTTP Status Code : 404
+Response HTTP Status Code : 400
 
 Response Payload :
 ```
 {
-    "status_code": "cdc-404",
-    "status_message": "kios_name is empty",
+    "status_code": "cdc-400",
+    "status_message": "address is empty",
     "data": null
 }
 ```
@@ -442,19 +466,19 @@ Response Payload :
 Request Payload :
 ```
 {
-    "id": "1",
     "kios_name": "kalimantan"
-    "address": ""
+    "address": "jl. k. h. moch mansyur no. 32 jembatan 5"
+    "branch_code": ""
 }
 ```
  
-Response HTTP Status Code : 404
+Response HTTP Status Code : 400
 
 Response Payload :
 ```
 {
-    "status_code": "cdc-404",
-    "status_message": "address is empty",
+    "status_code": "cdc-400",
+    "status_message": "branch_code is empty",
     "data": null
 }
 ```
@@ -464,20 +488,19 @@ Response Payload :
 Request Payload :
 ```
 {
-    "id": "1",
     "kios_name": "kalimantan"
     "address": "jl. k. h. moch mansyur no. 32 jembatan 5"
-    "branch_code": ""
+    "branch_code": "asal"
 }
 ```
  
 Response HTTP Status Code : 404
 
-Response Payload :
+Response Payload:
 ```
 {
     "status_code": "cdc-404",
-    "status_message": "branch_code is empty",
+    "status_message": "branch_code not found",
     "data": null
 }
 ```
@@ -487,20 +510,19 @@ Response Payload :
 Request Payload :
 ```
 {
-    "id": "1",
     "kios_name": "kalimantan"
     "address": "jl. k. h. moch mansyur no. 32 jembatan 5"
-    "branch_code": "asal"
+    "branch_code": "0001"
 }
 ```
  
-Response HTTP Status Code : 400
+Response HTTP Status Code : 403
 
 Response Payload:
 ```
 {
-    "status_code": "cdc-400",
-    "status_message": "branch_code not found",
+    "status_code": "cdc-403",
+    "status_message": "branch_code not owned by user login",
     "data": null
 }
 ```
@@ -510,7 +532,6 @@ Response Payload:
 Request Payload :
 ```
 {
-    "id": 1,
     "kios_name": "kalimantan",
     "address": "bekasi timur raya no. 159 A",
     "branch_code": "02629"
@@ -542,7 +563,6 @@ Response Payload :
 Request Payload :
 ```
 {
-    "id": 1,
     "kios_name": "kalimantan",
     "address": "jl. k. h. moch mansyur no. 32 jembatan 5",
     "branch_code": "02629"
@@ -579,23 +599,14 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-
-### Request Payloads
-Name | Type | Example Value
---- | --- | ---
-id | string | 1
-
-```
-{
-    "id": 1
-}
-```
+Email | application/json
 
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
+404 | Not Found | Kios not found in database  
+403 | Forbidden | kios_id not owned by user login 
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
 ```
@@ -626,91 +637,24 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Validation
-- id : required and not empty
+- kios_id : is owned by user login
 
 ### Scenario Test
 
-#### Case : Negative Case 1
+#### Case : Negative Case
 
-Request Payload : empty
-
-response HTTP Status Code : 400
+response HTTP Status Code : 403
 
 Response Payload : 
 ```
 {
-    "status_code": "cdc-400",
-    "status_message": "id is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 2
-
-Request Payload : 
-```
-{}
-```
-
-response HTTP Status Code : 400
-
-Response Payload : 
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "id is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 3
-
-Request Payload : 
-```
-{
-    "id" : ""
-}
-```
-
-response HTTP Status Code : 404
-
-Response Payload : 
-```
-{
-    "status_code": "cdc-404",
-    "status_message": "id is empty",
-    "data": null
-}
-```
-
-#### Case : Negative Case 4
-
-Request Payload : 
-```
-{
-    "id" : "asal"
-}
-```
-
-response HTTP Status Code : 404
-
-Response Payload : 
-```
-{
-    "status_code": "cdc-404",
-    "status_message": "id not found",
+    "status_code": "cdc-403",
+    "status_message": "kios_id not owned by user login",
     "data": null
 }
 ```
 
 #### Case : Positive Case
-
-Request Payload :
-```
-{
-    "id": 1
-}
-```
 
 Response HTTP Status Code : 200
 
@@ -740,27 +684,19 @@ DELETE /kios/:id
 ### Header
 Key | Value 
 --- | ---
-Content-Type | application/json
+Content-Type | *
 Accept | application/json
-
-### Request Payloads
-Name | Type | Example Value
---- | --- | ---
-id | string | 1
-
-```
-{
-    "id": 1
-}
-```
+Email | application/json
 
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
+404 | Not Found | Kios not found in database  
+403 | Forbidden | id not owned by user login
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
+204 | No Content | Delete data kios
 ```
 {
     "status_code": "CDC-400",
@@ -778,94 +714,28 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Validation
-- id: required and not empty
+- id: is owned by user login
 
 ### Scenario Test
 
-#### Case : Negative Case 1
+#### Case : Negative Case
 
-Request Payload : empty
-
-response HTTP Status Code : 400
+response HTTP Status Code : 403
 
 Response Payload : 
 ```
 {
-    "status_code": "cdc-400",
-    "status_message": "id is required",
-}
-```
-
-#### Case : Negative Case 2
-
-Request Payload :
-```
-{}
-```
-
-response HTTP Status Code : 400
-
-Response Payload : 
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "id is required",
-}
-```
-
-#### Case : Negative Case 3
-
-Request Payload :
-```
-{
-    "id": ""
-}
-```
-
-response HTTP Status Code : 404
-
-Response Payload : 
-```
-{
-    "status_code": "cdc-404",
-    "status_message": "id is empty",
-}
-```
-
-#### Case : Negative Case 4
-
-Request Payload :
-```
-{
-    "id": "asal"
-}
-```
-
-response HTTP Status Code : 404
-
-Response Payload : 
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "id not found",
+    "status_code": "cdc-403",
+    "status_message": "id not owned by user login",
 }
 ```
 
 #### Case : Positive Case
 
-Request Payload :
 ```
 {
     "id": 1
 }
 ```
 
-response HTTP Status Code : 200
-
-Response Payload : 
-```
-{
-    "status_code": "cdc-200",
-    "status_message": "OK",
-}
-```
+response HTTP Status Code : 204
