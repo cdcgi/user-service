@@ -444,7 +444,7 @@ Response Payload :
 Request Payload :
 ```
 {
-    "kios_name": "kalimantan"
+    "kios_name": "kalimantan",
     "address": ""
 }
 ```
@@ -465,8 +465,8 @@ Response Payload :
 Request Payload :
 ```
 {
-    "kios_name": "kalimantan"
-    "address": "jl. k. h. moch mansyur no. 32 jembatan 5"
+    "kios_name": "kalimantan",
+    "address": "jl. k. h. moch mansyur no. 32 jembatan 5",
     "branch_code": ""
 }
 ```
@@ -487,8 +487,8 @@ Response Payload :
 Request Payload :
 ```
 {
-    "kios_name": "kalimantan"
-    "address": "jl. k. h. moch mansyur no. 32 jembatan 5"
+    "kios_name": "kalimantan",
+    "address": "jl. k. h. moch mansyur no. 32 jembatan 5",
     "branch_code": "asal"
 }
 ```
@@ -509,8 +509,8 @@ Response Payload:
 Request Payload :
 ```
 {
-    "kios_name": "kalimantan"
-    "address": "jl. k. h. moch mansyur no. 32 jembatan 5"
+    "kios_name": "kalimantan",
+    "address": "jl. k. h. moch mansyur no. 32 jembatan 5",
     "branch_code": "0001"
 }
 ```
