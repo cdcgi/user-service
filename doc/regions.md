@@ -12,7 +12,7 @@ Module | HTTP Method | URL | Description
 POST /regions
 
 ### Database
-![](./regions.png)
+![](./region-layer.png)
 
 ### Headers
 Key | Value 
