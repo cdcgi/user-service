@@ -21,7 +21,7 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email  | application/json
+Email  | myemail@gmail.com
 
 ### Request Payloads
 Name | Type | Example Value
@@ -48,8 +48,7 @@ HTTP Code | Status | Description
 400 | Bad Request | bad request payload  
 404 | Not Found | branch not found in database
 403 | Forbidden | branch_code is not owned by user login
-500 | Internal Server Error | some un-handle error in server 
-200 | OK | OK
+500 | Internal Server Error | some un-handle error in server
 201 | Created | add data kios
 ```
 {
@@ -61,8 +60,8 @@ HTTP Code | Status | Description
 
 ```
 {
-    "status_code": "CDC-200",
-    "status_message": "OK",
+    "status_code": "CDC-201",
+    "status_message": "Created",
     "data": {
         "id": 1,
         "kios_name": "mandala",
@@ -308,7 +307,7 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | application/json
+Email | myemail@gmail.com
 
 ### Request Payloads
 Name | Type | Example Value
@@ -599,7 +598,7 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | application/json
+Email | myemail@gmail.com
 
 ### Response Payloads
 HTTP Code | Status | Description
@@ -686,28 +685,20 @@ Key | Value
 --- | ---
 Content-Type | *
 Accept | application/json
-Email | application/json
+Email | myemail@gmail.com
 
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
-400 | Bad Request | Bad request payload  
 404 | Not Found | Kios not found in database  
 403 | Forbidden | id not owned by user login
-500 | Internal Server Error | some un-handle error in server 
-200 | OK | OK
+500 | Internal Server Error | some un-handle error in server
 204 | No Content | Delete data kios
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "Bad Request",
-}
-```
 
 ```
 {
-    "status_code": "CDC-200",
-    "status_message": "OK",
+    "status_code": "CDC-204",
+    "status_message": "No Content",
 }
 ```
 
@@ -731,11 +722,5 @@ Response Payload :
 ```
 
 #### Case : Positive Case
-
-```
-{
-    "id": 1
-}
-```
 
 response HTTP Status Code : 204
