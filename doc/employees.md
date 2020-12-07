@@ -21,7 +21,7 @@ Key | Value
 --- | ---
 Content-Type | *
 Accept | application/json
-Email | application/json
+Email | alamat@emailcdc.com
 
 ### Request Payloads
 Name | Type | Example Value
@@ -33,7 +33,7 @@ stall_code | string | Heavy Repair
 {
     "employee_kode": "20200301",
     "employee_nama": "ferry",
-    "stall_code": "Heavy Repair",
+    "stall_code": "Heavy Repair"
 
 }
 ```
@@ -257,7 +257,7 @@ Key | Value
 --- | ---
 Content-Type | *
 Accept | application/json
-Email | application/json
+Email | alamat@emailcdc.com
 
 ### Response Payloads
 HTTP Code | Status | Description
@@ -319,7 +319,7 @@ Key | Value
 --- | ---
 Content-Type | *
 Accept | application/json
-Email | application/json
+Email | alamat@emailcdc.com
 
 ### Request Payloads
 Name | Type | Example Value
@@ -590,7 +590,7 @@ Key | Value
 --- | ---
 Content-Type | *
 Accept | application/json
-Email | application/json
+Email | alamat@emailcdc.com
 
 ### Response Payloads
 HTTP Code | Status | Description
