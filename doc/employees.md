@@ -34,7 +34,6 @@ stall_code | string | Heavy Repair
     "employee_kode": "20200301",
     "employee_nama": "ferry",
     "stall_code": "Heavy Repair"
-
 }
 ```
 
