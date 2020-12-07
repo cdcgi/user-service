@@ -668,7 +668,7 @@ re_new_password | string | jakaRTa!2021
 {
     "token": "c4ca4238a0b923820dcc509a6f75849b",
     "new_password": "jakaRTa!2021",
-    "re_new_password": "jakaRTa!2021",
+    "re_new_password": "jakaRTa!2021"
 }
 ```
 ### Response Payloads
@@ -695,7 +695,7 @@ HTTP Code | Status | Description
           "id":1,  
           "name": "Jacky Chan",
           "username": "jacky",
-          "email": "jacky@gmail.com",
+          "email": "jacky@gmail.com"
         },
         "forgot_password_temps": {
           "id":1,
@@ -883,7 +883,7 @@ Response Payload :
           "id":1,  
           "name": "Jacky Chan",
           "username": "jacky",
-          "email": "jacky@gmail.com",
+          "email": "jacky@gmail.com"
         },
         "forgot_password_temps": {
           "id":1,  
