@@ -2,6 +2,7 @@
 Module | HTTP Method | URL | Description
 --- | --- | --- | ---
 [Add](#add) | POST | /companies | Add Data Companies
+[View](#view) | GET | /companies/:id | View Data Companies
 [Edit](#edit) | PUT | /companies/:id | Edit Data Companies
 [Delete](#delete) | DELETE | /companies/:id | Delete Data Companies
 
@@ -51,9 +52,9 @@ kota | string | JAKARTA
 HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
 500 | Internal Server Error | some un-handle error in server
 200 | OK | OK
+201 | Created | Created
 ```
 {
     "status_code": "CDC-400",
@@ -64,8 +65,8 @@ HTTP Code | Status | Description
 
 ```
 {
-    "status_code": "CDC-200",
-    "status_message": "OK",
+    "status_code": "CDC-201",
+    "status_message": "Created",
     "data": {
         "id":"5",
         "company_code": "TC",
@@ -85,7 +86,7 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Validation
-- company_code : required and not empty
+- company_code : unique and not empty
 - name : required and not empty
 - address : required and not empty
 - npwp : required and not empty
@@ -365,6 +366,43 @@ Response HTTP Status Code : 200
 Response Payload :
 ```
 {
+    "status_code": "CDC-201",
+    "status_message": "Created",
+    "data": {
+        "id":"5",
+        "company_code": "TC",
+        "name": "Test Company",
+        "address": "JL. Test Company",
+        "npwp": "123",
+        "nomor_kukuh": "123",
+        "tgl_kukuh": "12",
+        "phone_num": "021",
+        "fax_num": "021",
+        "seri_pajak": "12",
+        "kota": "JAKARTA"
+    }
+}
+```
+
+## <a name="view"></a>View Data Companies
+
+### Endpoint
+GET /companies/:id
+
+### Header
+Key | Value
+--- | ---
+Content-Type | application/json
+Accept | application/json
+
+### Response Payloads
+HTTP Code | Status | Description
+--- | --- | ---
+404 | Not Found | Companies not found in database
+500 | Internal Server Error | some un-handle error in server
+200 | OK | OK
+```
+{
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": {
@@ -383,6 +421,33 @@ Response Payload :
 }
 ```
 
+### Scenario Test
+
+#### Case : Positive Case
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "OK",
+    "data": {
+      "id":"5",
+      "company_code": "TC",
+      "name": "Test Company",
+      "address": "JL. Test Company",
+      "npwp": "123",
+      "nomor_kukuh": "123",
+      "tgl_kukuh": "12",
+      "phone_num": "021",
+      "fax_num": "021",
+      "seri_pajak": "12",
+      "kota": "JAKARTA"
+    }
+}
+```
+
 ## <a name="edit"></a>Edit Data Companies
 
 ### Endpoint
@@ -397,7 +462,6 @@ Accept | application/json
 ### Request Payloads
 Name | Type | Example Value
 --- | --- | ---
-id | string | 5
 company_code | string | TC  
 name | string | Test Company
 address | string | JL. Test Company
@@ -410,7 +474,6 @@ seri_pajak | string | 12
 kota | string | JAKARTA
 ```
 {
-    "id":"5",
     "company_code": "TC",
     "name": "Test Company",
     "address": "JL. Test Company",
@@ -428,7 +491,7 @@ kota | string | JAKARTA
 HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
+404 | Not Found | Companies not found in database  
 500 | Internal Server Error | some un-handle error in server
 200 | OK | OK
 ```
@@ -462,8 +525,7 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Validation
-- id : required and not empty
-- company_code : required and not empty
+- company_code : unique and not empty
 - name : required and not empty
 - address : required and not empty
 - npwp : required and not empty
@@ -499,57 +561,16 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "id is required",
+    "status_message": "id with company_code, name, address, npwp and phone_num is required",
     "data": null
 }
 ```
 
 #### Case : Negative Case 3
 
-Request payload :
-```
-{
-    "id": ""
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "id is empty",
-    "data": null
-}
-```
-
-#### Case : Negative Case 4
-
 Request Payload
 ```
 {
-    "id": "!idCompanies"
-}
-```
-
-Response HTTP Status Code : 404
-
-Response Payload
-```
-{
-    "status_code": "cdc-404",
-    "status_message": "id not found",
-    "data": null
-}
-```
-
-#### Case : Negative Case 5
-
-Request Payload
-```
-{
-    "id": "5",
     "company_code": ""
 }
 ```
@@ -565,12 +586,12 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 6
+#### Case : Negative Case 4
 
 Request Payload
 ```
 {
-    "id": "5",
+    "company_code": "TC",
     "name": ""
 }
 ```
@@ -586,12 +607,13 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 7
+#### Case : Negative Case 5
 
 Request Payload
 ```
 {
-    "id": "5",
+    "company_code": "TC",
+    "name": "Test Company",
     "address": ""
 }
 ```
@@ -607,12 +629,14 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 8
+#### Case : Negative Case 6
 
 Request Payload
 ```
 {
-    "id": "5",
+    "company_code": "TC",
+    "name": "Test Company",
+    "address": "JL. Test Company",
     "npwp": ""
 }
 ```
@@ -628,12 +652,15 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 9
+#### Case : Negative Case 7
 
 Request Payload
 ```
 {
-    "id": "5",
+    "company_code": "TC",
+    "name": "Test Company",
+    "address": "JL. Test Company",
+    "npwp": "123",
     "phone_num": ""
 }
 ```
@@ -649,12 +676,11 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 10
+#### Case : Negative Case 8
 
 Request Payload
 ```
 {
-    "id": "5",
     "company_code": "MMM"
 }
 ```
@@ -675,7 +701,6 @@ Response Payload
 Request Payload :
 ```
 {
-    "id": "5",
     "region_code": "TCC"
 }
 ```
@@ -708,7 +733,6 @@ Response Payload :
 Request Payload :
 ```
 {
-    "id": "5",
     "name": "Test Company Center"
 }
 ```
@@ -741,7 +765,6 @@ Response Payload :
 Request Payload :
 ```
 {
-    "id": "5",
     "address": "JL. Test Company Center"
 }
 ```
@@ -774,7 +797,6 @@ Response Payload :
 Request Payload :
 ```
 {
-    "id": "5",
     "npwp": "1234"
 }
 ```
@@ -807,7 +829,6 @@ Response Payload :
 Request Payload :
 ```
 {
-    "id": "5",
     "phone_num": "0216"
 }
 ```
@@ -843,26 +864,17 @@ DELETE /companies/:id
 ### Headers
 Key | Value
 --- | ---
-Content-Type | application/json
+Content-Type | *
 Accept | application/json
-
-### Request Payloads
-Name | Type | Example Value
---- | --- | ---
-id | string | 5
-```
-{
-    "id": "5",
-}
-```
 
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
+404 | Not Found | Companies not found in database  
 500 | Internal Server Error | some un-handle error in server
 200 | OK | OK
+204 | No Content | No Content
 ```
 {
     "status_code": "CDC-400",
@@ -873,108 +885,22 @@ HTTP Code | Status | Description
 
 ```
 {
+    "status_code": "CDC-204",
+    "status_message": "No Content",
+    "data": null
+}
+```
+
+```
+{
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": null
 }
 ```
-
-### Logic
-
-#### Validation
-- id : required and not empty
 
 ### Scenario Test
 
-#### Case : Negative Case 1
-
-Request Payload : empty
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "id is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 2
-
-Request Payload :
-```
-{}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "id is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 3
-
-Request payload :
-```
-{
-    "id": ""
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "id is empty",
-    "data": null
-}
-```
-
-#### Case : Negative Case 4
-
-Request Payload
-```
-{
-    "id": "!idCompanies"
-}
-```
-
-Response HTTP Status Code : 404
-
-Response Payload
-```
-{
-    "status_code": "cdc-404",
-    "status_message": "id not found",
-    "data": null
-}
-```
-
 #### Case : Positive Case
 
-Request Payload :
-```
-{
-    "id": "5",
-}
-```
-
-Response HTTP Status Code : 200
-
-Response Payload :
-```
-{
-    "status_code": "CDC-200",
-    "status_message": "OK",
-    "data": null
-}
-```
+Response HTTP Status Code : 204
