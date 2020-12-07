@@ -14,7 +14,7 @@ POST /kios
 ## Database
 ![](./kios-layer.png)
 
-For add, you need get branch_code from branches tables
+For add, you need get branch_id from branches tables
 
 ### Header
 Key | Value 
@@ -28,7 +28,7 @@ Name | Type | Example Value
 --- | --- | ---
 kios_name | string | mandala  
 address | string | jl. bekasi timur raya no. 159 A
-branch_code | string | mandala
+branch_id | string | 0e38acf5-ac53-11e9-91ea-560001ead144
 
 ```
 {
@@ -36,7 +36,7 @@ branch_code | string | mandala
     "address": "jl. bekasi timur raya no. 159 A",
     "branches": [
         {
-            "branch_code": "02629"
+            "branch_id": "0e38acf5-ac53-11e9-91ea-560001ead144"
         }
     ]
 }
@@ -47,7 +47,7 @@ HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | bad request payload  
 404 | Not Found | branch not found in database
-403 | Forbidden | branch_code is not owned by user login
+403 | Forbidden | branch_id is not owned by user login
 500 | Internal Server Error | some un-handle error in server
 201 | Created | add data kios
 ```
@@ -68,7 +68,7 @@ HTTP Code | Status | Description
         "address": jl. "bekasi timur raya no. 159 A",
         "branches": [
             {
-                "branch_code": "02629"
+                "branch_id": "0e38acf5-ac53-11e9-91ea-560001ead144"
             }
         ]
     }
@@ -80,7 +80,7 @@ HTTP Code | Status | Description
 #### Validation
 - kios_name     : required and not empty
 - address       : required and not empty
-- branch_code   : required and not empty, owned by user login
+- branch_id     : required and not empty, owned by user login
 
 ### Scenario Test
 
@@ -184,7 +184,7 @@ Request Payload :
 ```
 {
     "kios_name": "mandala",
-    "address": "jl. bekasi timur raya no. 159 A",
+    "address": "jl. bekasi timur raya no. 159 A"
 }
 ```
  
@@ -194,7 +194,7 @@ Response Payload:
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "branch_code is required",
+    "status_message": "branch_id is required",
     "data": null
 }
 ```
@@ -206,7 +206,7 @@ Request Payload :
 {
     "kios_name": "mandala",
     "address": "jl. bekasi timur raya no. 159 A",
-    "branch_code": ""
+    "branch_id": ""
 }
 ```
  
@@ -216,7 +216,7 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "branch_code is empty",
+    "status_message": "branch_id is empty",
     "data": null
 }
 ```
@@ -228,7 +228,7 @@ Request Payload :
 {
     "kios_name": "mandala",
     "address": "jl. bekasi timur raya no. 159 A",
-    "branch_code": "asal"
+    "branch_id": "asal"
 }
 ```
  
@@ -238,7 +238,7 @@ Response Payload:
 ```
 {
     "status_code": "cdc-404",
-    "status_message": "branch_code is not found",
+    "status_message": "branch_id is not found",
     "data": null
 }
 ```
@@ -250,7 +250,7 @@ Request Payload :
 {
     "kios_name": "mandala",
     "address": "jl. bekasi timur raya no. 159 A",
-    "branch_code": "0001"
+    "branch_id": "0001"
 }
 ```
 
@@ -260,7 +260,7 @@ Response Payload :
 ```
 {
     "status_code": "cdc-403",
-    "status_message": "branch_code is not owned by user login",
+    "status_message": "branch_id is not owned by user login",
     "data": null
 }
 ```
@@ -273,7 +273,7 @@ Request Payload :
     "id": 1,
     "kios_name": "mandala",
     "address": "jl. bekasi timur raya no. 159 A",
-    "branch_code": "02629"
+    "branch_id": "0e38acf5-ac53-11e9-91ea-560001ead144"
 }
 ```
 
@@ -287,10 +287,10 @@ Response Payload :
     "data": {
         "id": 1,
         "kios_name": "mandala",
-        "address": "jl. bekasi timur raya no. 159 A"
+        "address": "jl. bekasi timur raya no. 159 A",
         "branches": [
             {
-                "branch_code": "02629"
+                "branch_id": "0e38acf5-ac53-11e9-91ea-560001ead144"
             }
         ]
     }
@@ -314,13 +314,13 @@ Name | Type | Example Value
 --- | --- | ---
 kios_name | string | mandala  
 address | string | bekasi timur raya no. 159 A
-branch_code | string | 02629
+branch_id | string | 0e38acf5-ac53-11e9-91ea-560001ead144
 
 ```
 {
     "kios_name": "mandala",
     "address": "bekasi timur raya no. 159 A",
-    "branch_code": "02629"
+    "branch_id": "0e38acf5-ac53-11e9-91ea-560001ead144"
 }
 ```
 
@@ -329,7 +329,7 @@ HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | Bad request payload  
 404 | Not Found | Kios not found in database  
-403 | Forbidden | branch_code is not owned by user login
+403 | Forbidden | branch_id is not owned by user login
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
 ```
@@ -350,7 +350,7 @@ HTTP Code | Status | Description
         "address": "jl. k. h. moch mansyur no. 32 jembatan 5",
         "branches": [
             {
-                "branch_code": "02629"
+                "branch_id": "0e38acf5-ac53-11e9-91ea-560001ead144"
             }
         ]
     }
@@ -362,7 +362,7 @@ HTTP Code | Status | Description
 #### Validation
 - kios_name     : not empty
 - address       : not empty
-- branch_code   : required and not empty, owned by user login
+- branch_id     : required and not empty, owned by user login
 
 ### Scenario Test
 
@@ -467,7 +467,7 @@ Request Payload :
 {
     "kios_name": "kalimantan",
     "address": "jl. k. h. moch mansyur no. 32 jembatan 5",
-    "branch_code": ""
+    "branch_id": ""
 }
 ```
  
@@ -477,7 +477,7 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "branch_code is empty",
+    "status_message": "branch_id is empty",
     "data": null
 }
 ```
@@ -489,7 +489,7 @@ Request Payload :
 {
     "kios_name": "kalimantan",
     "address": "jl. k. h. moch mansyur no. 32 jembatan 5",
-    "branch_code": "asal"
+    "branch_id": "asal"
 }
 ```
  
@@ -499,7 +499,7 @@ Response Payload:
 ```
 {
     "status_code": "cdc-404",
-    "status_message": "branch_code not found",
+    "status_message": "branch_id not found",
     "data": null
 }
 ```
@@ -511,7 +511,7 @@ Request Payload :
 {
     "kios_name": "kalimantan",
     "address": "jl. k. h. moch mansyur no. 32 jembatan 5",
-    "branch_code": "0001"
+    "branch_id": "0001"
 }
 ```
  
@@ -521,7 +521,7 @@ Response Payload:
 ```
 {
     "status_code": "cdc-403",
-    "status_message": "branch_code not owned by user login",
+    "status_message": "branch_id not owned by user login",
     "data": null
 }
 ```
@@ -533,7 +533,7 @@ Request Payload :
 {
     "kios_name": "kalimantan",
     "address": "bekasi timur raya no. 159 A",
-    "branch_code": "02629"
+    "branch_id": "0e38acf5-ac53-11e9-91ea-560001ead144"
 }
 ```
 
@@ -550,7 +550,7 @@ Response Payload :
         "address": "bekasi timur raya no. 159 A",
         "branches": [
             {
-                "branch_code": "02629"
+                "branch_id": "0e38acf5-ac53-11e9-91ea-560001ead144"
             }
         ]
     }
@@ -564,7 +564,7 @@ Request Payload :
 {
     "kios_name": "kalimantan",
     "address": "jl. k. h. moch mansyur no. 32 jembatan 5",
-    "branch_code": "02629"
+    "branch_id": "0e38acf5-ac53-11e9-91ea-560001ead144"
 }
 ```
 
@@ -581,7 +581,7 @@ Response Payload :
         "address": "jl. k. h. moch mansyur no. 32 jembatan 5",
         "branches": [
             {
-                "branch_code": "02629"
+                "branch_id": "0e38acf5-ac53-11e9-91ea-560001ead144"
             }
         ]
     }
@@ -603,18 +603,10 @@ Email | myemail@gmail.com
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
-400 | Bad Request | Bad request payload  
 404 | Not Found | Kios not found in database  
 403 | Forbidden | kios_id not owned by user login 
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "Bad Request",
-    "data": null
-}
-```
 
 ```
 {
@@ -626,7 +618,7 @@ HTTP Code | Status | Description
         "address": jl. "bekasi timur raya no. 159 A",
         "branches": [
             {
-                "branch_code": "02629"
+                "branch_id": "0e38acf5-ac53-11e9-91ea-560001ead144"
             }
         ]
     }
@@ -668,7 +660,7 @@ Response Payload :
         "address": "jl. k. h. moch mansyur no. 32 jembatan 5",
         "branches": [
             {
-                "branch_code": "06502"
+                "branch_id": "0e38ac51-ac53-11e9-91ea-560001ead144"
             }
         ]
     }
@@ -694,13 +686,6 @@ HTTP Code | Status | Description
 403 | Forbidden | id not owned by user login
 500 | Internal Server Error | some un-handle error in server
 204 | No Content | Delete data kios
-
-```
-{
-    "status_code": "CDC-204",
-    "status_message": "No Content",
-}
-```
 
 ### Logic
 
