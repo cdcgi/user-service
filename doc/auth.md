@@ -75,13 +75,7 @@ HTTP Code | Status | Description
 - username : required and not empty
 - password: required and not empty
 
-<<<<<<< HEAD
 *if any special logic, please write down the logic here. thanks*
-=======
-*if any special logic, please write down the logic here*
->>>>>>> add validation logic on login
-
-
 
 
 
@@ -424,7 +418,7 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | application/json
+Email | example@gmail.com
 
 ### Request Payloads
 Name | Type | Example Value
@@ -436,7 +430,7 @@ re_new_password | string | jakaRTa!2021
 {
     "old_password": "jakaRTa!2020",
     "new_password": "jakaRTa!2021",
-    "re_new_password": "jakaRTa!2021",
+    "re_new_password": "jakaRTa!2021"
 }
 ```
 ### Response Payloads
@@ -464,7 +458,7 @@ HTTP Code | Status | Description
           "id":1,  
           "name": "Jacky Chan",
           "username": "jacky",
-          "email": "jacky@gmail.com",
+          "email": "jacky@gmail.com"
         }
     }
 }
@@ -806,7 +800,7 @@ Response Payload :
 Request payload :
 ```
 {
-    "token": "c4ca4238a0b923820dcc509a6f75849b"
+    "token": "c4ca4238a0b923820dcc509a6f75849b",
     "new_password": ""
 }
 ```
@@ -827,7 +821,7 @@ Response Payload :
 Request Payload :
 ```
 {
-    "token": "c4ca4238a0b923820dcc509a6f75849b"
+    "token": "c4ca4238a0b923820dcc509a6f75849b",
     "new_password": "asal"
 }
 ```
@@ -848,7 +842,7 @@ Response Payload :
 Request Payload :
 ```
 {
-    "token": "c4ca4238a0b923820dcc509a6f75849b"
+    "token": "c4ca4238a0b923820dcc509a6f75849b",
     "new_password": "jakaRTa!2020",
     "re_new_password": "asal"
 }
@@ -871,7 +865,7 @@ Response Payload :
 Request Payload :
 ```
 {
-    "token": "c4ca4238a0b923820dcc509a6f75849b"
+    "token": "c4ca4238a0b923820dcc509a6f75849b",
     "new_password": "jakaRTa!2021",
     "re_new_password": "jakaRTa!2021"
 }
