@@ -534,39 +534,6 @@ HTTP Code | Status | Description
 
 #### Case : Negative Case 1
 
-Request Payload : empty
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "id is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 2
-
-Request Payload :
-```
-{}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "id with company_code, name, address, npwp and phone_num is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 3
-
 Request Payload
 ```
 {
@@ -585,7 +552,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 4
+#### Case : Negative Case 2
 
 Request Payload
 ```
@@ -606,7 +573,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 5
+#### Case : Negative Case 3
 
 Request Payload
 ```
@@ -628,7 +595,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 6
+#### Case : Negative Case 4
 
 Request Payload
 ```
@@ -651,7 +618,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 7
+#### Case : Negative Case 5
 
 Request Payload
 ```
@@ -675,7 +642,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 8
+#### Case : Negative Case 6
 
 Request Payload
 ```
@@ -700,7 +667,7 @@ Response Payload
 Request Payload :
 ```
 {
-    "region_code": "TCC"
+    "company_code": "TCC"
 }
 ```
 
@@ -869,7 +836,6 @@ Accept | application/json
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
-400 | Bad Request | Bad request payload  
 404 | Not Found | Companies not found in database  
 500 | Internal Server Error | some un-handle error in server
 204 | No Content | No Content
