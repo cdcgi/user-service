@@ -28,7 +28,7 @@ name | string | Test Company
 address | string | JL. Test Company
 npwp | string | 123
 nomor_kukuh | string | 123
-tgl_kukuh | date | 12
+tgl_kukuh | date | 2020-12-08
 phone_num | string | 021  
 fax_num | string | 021
 seri_pajak | string | 12
@@ -40,7 +40,7 @@ kota | string | JAKARTA
     "address": "JL. Test Company",
     "npwp": "123",
     "nomor_kukuh": "123",
-    "tgl_kukuh": "12",
+    "tgl_kukuh": "2020-12-08",
     "phone_num": "021",
     "fax_num": "021",
     "seri_pajak": "12",
@@ -73,7 +73,7 @@ HTTP Code | Status | Description
         "address": "JL. Test Company",
         "npwp": "123",
         "nomor_kukuh": "123",
-        "tgl_kukuh": "12",
+        "tgl_kukuh": "2020-12-08",
         "phone_num": "021",
         "fax_num": "021",
         "seri_pajak": "12",
@@ -85,7 +85,7 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Validation
-- company_code : unique and not empty
+- company_code : unique, required and not empty
 - name : required and not empty
 - address : required and not empty
 - npwp : required and not empty
@@ -352,7 +352,7 @@ Request Payload :
     "address": "JL. Test Company",
     "npwp": "123",
     "nomor_kukuh": "123",
-    "tgl_kukuh": "12",
+    "tgl_kukuh": "2020-12-08",
     "phone_num": "021",
     "fax_num": "021",
     "seri_pajak": "12",
@@ -374,7 +374,7 @@ Response Payload :
         "address": "JL. Test Company",
         "npwp": "123",
         "nomor_kukuh": "123",
-        "tgl_kukuh": "12",
+        "tgl_kukuh": "2020-12-08",
         "phone_num": "021",
         "fax_num": "021",
         "seri_pajak": "12",
@@ -411,7 +411,7 @@ HTTP Code | Status | Description
         "address": "JL. Test Company",
         "npwp": "123",
         "nomor_kukuh": "123",
-        "tgl_kukuh": "12",
+        "tgl_kukuh": "2020-12-08",
         "phone_num": "021",
         "fax_num": "021",
         "seri_pajak": "12",
@@ -438,7 +438,7 @@ Response Payload :
       "address": "JL. Test Company",
       "npwp": "123",
       "nomor_kukuh": "123",
-      "tgl_kukuh": "12",
+      "tgl_kukuh": "2020-12-08",
       "phone_num": "021",
       "fax_num": "021",
       "seri_pajak": "12",
@@ -466,7 +466,7 @@ name | string | Test Company
 address | string | JL. Test Company
 npwp | string | 123
 nomor_kukuh | string | 123
-tgl_kukuh | date | 12
+tgl_kukuh | date | 2020-12-08
 phone_num | string | 021  
 fax_num | string | 021
 seri_pajak | string | 12
@@ -478,7 +478,7 @@ kota | string | JAKARTA
     "address": "JL. Test Company",
     "npwp": "123",
     "nomor_kukuh": "123",
-    "tgl_kukuh": "12",
+    "tgl_kukuh": "2020-12-08",
     "phone_num": "021",
     "fax_num": "021",
     "seri_pajak": "12",
@@ -512,7 +512,7 @@ HTTP Code | Status | Description
         "address": "JL. Test Company",
         "npwp": "123",
         "nomor_kukuh": "123",
-        "tgl_kukuh": "12",
+        "tgl_kukuh": "2020-12-08",
         "phone_num": "021",
         "fax_num": "021",
         "seri_pajak": "12",
@@ -524,7 +524,7 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Validation
-- company_code : unique and not empty
+- company_code : unique, required and not empty
 - name : required and not empty
 - address : required and not empty
 - npwp : required and not empty
@@ -718,7 +718,7 @@ Response Payload :
         "address": "JL. Test Company",
         "npwp": "123",
         "nomor_kukuh": "123",
-        "tgl_kukuh": "12",
+        "tgl_kukuh": "2020-12-08",
         "phone_num": "021",
         "fax_num": "021",
         "seri_pajak": "12",
@@ -750,7 +750,7 @@ Response Payload :
         "address": "JL. Test Company",
         "npwp": "123",
         "nomor_kukuh": "123",
-        "tgl_kukuh": "12",
+        "tgl_kukuh": "2020-12-08",
         "phone_num": "021",
         "fax_num": "021",
         "seri_pajak": "12",
@@ -782,7 +782,7 @@ Response Payload :
         "address": "JL. Test Company Center",
         "npwp": "123",
         "nomor_kukuh": "123",
-        "tgl_kukuh": "12",
+        "tgl_kukuh": "2020-12-08",
         "phone_num": "021",
         "fax_num": "021",
         "seri_pajak": "12",
@@ -814,7 +814,7 @@ Response Payload :
         "address": "JL. Test Company Center",
         "npwp": "1234",
         "nomor_kukuh": "123",
-        "tgl_kukuh": "12",
+        "tgl_kukuh": "2020-12-08",
         "phone_num": "021",
         "fax_num": "021",
         "seri_pajak": "12",
@@ -846,7 +846,7 @@ Response Payload :
         "address": "JL. Test Company Center",
         "npwp": "1234",
         "nomor_kukuh": "123",
-        "tgl_kukuh": "12",
+        "tgl_kukuh": "2020-12-08",
         "phone_num": "0216",
         "fax_num": "021",
         "seri_pajak": "12",
