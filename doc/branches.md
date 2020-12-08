@@ -93,9 +93,7 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Headers Validation
-- email : user email required and is not empty
-- email : check user email is login or not
-- email : must be top level, like administrator
+No Header Validation
 
 #### Request Payloads Validation
 - branch_code : required and not empty
@@ -110,51 +108,6 @@ HTTP Code | Status | Description
 
 #### Case : Negative Case 1
 
-Headers : empty
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 2
-
-Headers : email is not login
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email is not login",
-    "data": null
-}
-```
-
-#### Case : Negative Case 3
-
-Headers : email must be top level access
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email must be top level access or administrator",
-    "data": null
-}
-```
-
-#### Case : Negative Case 4
-
 Request Payload : empty
 
 Response HTTP Status Code : 400
@@ -168,7 +121,7 @@ Response Payload :
 }
 ```
 
-#### Case : Negative Case 5
+#### Case : Negative Case 2
 
 Request Payload :
 ```
@@ -186,7 +139,7 @@ Response Payload :
 }
 ```
 
-#### Case : Negative Case 6
+#### Case : Negative Case 3
 
 Request payload :
 ```
@@ -216,7 +169,7 @@ Response Payload :
 }
 ```
 
-#### Case : Negative Case 7
+#### Case : Negative Case 4
 
 Request Payload :
 ```
@@ -246,7 +199,7 @@ Response Payload :
 }
 ```
 
-#### Case : Negative Case 8
+#### Case : Negative Case 5
 
 Request Payload :
 ```
@@ -276,7 +229,7 @@ Response Payload:
 }
 ```
 
-#### Case : Negative Case 9
+#### Case : Negative Case 6
 
 Request Payload
 ```
@@ -305,7 +258,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 10
+#### Case : Negative Case 7
 
 Request Payload
 ```
@@ -335,7 +288,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 11
+#### Case : Negative Case 8
 
 Request Payload
 ```
@@ -364,7 +317,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 12
+#### Case : Negative Case 9
 
 Request Payload
 ```
@@ -394,7 +347,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 13
+#### Case : Negative Case 10
 
 Request Payload
 ```
@@ -423,7 +376,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 14
+#### Case : Negative Case 11
 
 Request Payload
 ```
@@ -453,7 +406,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 15
+#### Case : Negative Case 12
 
 Request Payload
 ```
@@ -482,7 +435,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 16
+#### Case : Negative Case 13
 
 Request Payload
 ```
@@ -606,14 +559,14 @@ email | string | testingmotor@gmail.com
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
-400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
+403 | Forbidden | Branch is not owned by user login
+404 | Not Found | Branch not found in database  
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
 ```
 {
-    "status_code": "CDC-400",
-    "status_message": "Bad Request",
+    "status_code": "CDC-403",
+    "status_message": "Branch is not owned by user login",
     "data": null
 }
 ```
@@ -641,84 +594,34 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Endpoint Validation
-must be add parameter id and must exist in database
+- must be add parameter id
+- id must exist in database
+- must owned by user login
 
 #### Headers Validation
-- email : user email required and is not empty
-- email : check user email is login or not
-- email : must be top level, like administrator
+No Headers Validation
 
 #### Request Payloads Validation
-- branch_name : required and not empty
-- address : required and not empty
-- pic : required and not empty
-- kabeng : required and not empty
+No Request Payloads Validation
 
 ### Scenario Test
 
 #### Case : Negative Case 1
 
-Headers : empty
+Branch is not owned by user login
 
-Response HTTP Status Code : 400
+Response HTTP Status Code : 403
 
 Response Payload :
 ```
 {
-    "status_code": "CDC-400",
-    "status_message": "headers email is required",
+    "status_code": "CDC-403",
+    "status_message": "Branch is not owned by user login",
     "data": null
 }
 ```
 
 #### Case : Negative Case 2
-
-Headers : email is not login
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email is not login",
-    "data": null
-}
-```
-
-#### Case : Negative Case 3
-
-Headers : email must be top level access
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email must be top level access or administrator",
-    "data": null
-}
-```
-
-#### Case : Negative Case 4
-
-- param id is empty
-
-Endpoint : /branches
-
-Response HTTP Status Code : 404
-
-Response Payload :
-```
-{
-    "status_code": "CDC-404",
-    "status_message": "url Not Found, param id is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 5
 
 - param id is not exist in database
 
@@ -735,235 +638,35 @@ Response Payload :
 }
 ```
 
-#### Case : Negative Case 6
+#### Case : Negative Case 3
 
 Request Payload : empty
 
-Response HTTP Status Code : 400
+Response HTTP Status Code : 200
 
 Response Payload :
 ```
 {
-    "status_code": "CDC-400",
-    "status_message": "branch name is required",
+    "status_code": "CDC-200",
+    "status_message": "No data was changed",
     "data": null
 }
 ```
 
-#### Case : Negative Case 7
+#### Case : Negative Case 4
 
 Request Payload :
 ```
 {}
 ```
 
-Response HTTP Status Code : 400
+Response HTTP Status Code : 200
 
 Response Payload :
 ```
 {
-    "status_code": "CDC-400",
-    "status_message": "branch name is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 8
-
-Request payload :
-```
-{
-    "branch_name": "",
-    "address": "Jl. Kebahagiaan No.7",
-    "pic": "Rendi",
-    "kabeng": "Rojak",
-    "kelurahan": "Palmerah",
-    "kecamatan": "Palmerah",
-    "kab_kota": "Jakarta Barat",
-    "phone_number": "5367896",
-    "fax_number": "5113470",
-    "email": "testingmotor@gmail.com"
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "branch name is empty",
-    "data": null
-}
-```
-
-#### Case : Negative Case 9
-
-Request Payload
-```
-{
-    "branch_name": "Testing Jaya Motor",
-    "pic": "Budi",
-    "kabeng": "Ridwan",
-    "kelurahan": "Palmerah",
-    "kecamatan": "Palmerah",
-    "kab_kota": "Jakarta Barat",
-    "phone_number": "5367896",
-    "fax_number": "5113470",
-    "email": "testingmotor@gmail.com"
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "address is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 10
-
-Request Payload
-```
-{
-    "branch_name": "Testing Jaya Motor",
-    "address": "",
-    "pic": "Budi",
-    "kabeng": "Ridwan",
-    "kelurahan": "Palmerah",
-    "kecamatan": "Palmerah",
-    "kab_kota": "Jakarta Barat",
-    "phone_number": "5367896",
-    "fax_number": "5113470",
-    "email": "testingmotor@gmail.com"
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "address is empty",
-    "data": null
-}
-```
-
-#### Case : Negative Case 11
-
-Request Payload
-```
-{
-    "branch_name": "Testing Jaya Motor",
-    "address": "Jl. Kebahagiaan No.7",
-    "kabeng": "Rojak",
-    "kelurahan": "Palmerah",
-    "kecamatan": "Palmerah",
-    "kab_kota": "Jakarta Barat",
-    "phone_number": "5367896",
-    "fax_number": "5113470",
-    "email": "testingmotor@gmail.com"
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "pic is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 12
-
-Request Payload
-```
-{
-    "branch_name": "Testing Jaya Motor",
-    "address": "Jl. Kebahagiaan No.7",
-    "pic": "",
-    "kabeng": "Rojak",
-    "kelurahan": "Palmerah",
-    "kecamatan": "Palmerah",
-    "kab_kota": "Jakarta Barat",
-    "phone_number": "5367896",
-    "fax_number": "5113470",
-    "email": "testingmotor@gmail.com"
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "pic is empty",
-    "data": null
-}
-```
-
-#### Case : Negative Case 13
-
-Request Payload
-```
-{
-    "branch_name": "Testing Jaya Motor",
-    "address": "Jl. Kebahagiaan No.7",
-    "pic": "Rendi",
-    "kelurahan": "Palmerah",
-    "kecamatan": "Palmerah",
-    "kab_kota": "Jakarta Barat",
-    "phone_number": "5367896",
-    "fax_number": "5113470",
-    "email": "testingmotor@gmail.com"
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "kabeng is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 14
-
-Request Payload
-```
-{
-    "branch_name": "Testing Jaya Motor",
-    "address": "Jl. Kebahagiaan No.7",
-    "pic": "Rendi",
-    "kabeng": "",
-    "kelurahan": "Palmerah",
-    "kecamatan": "Palmerah",
-    "kab_kota": "Jakarta Barat",
-    "phone_number": "5367896",
-    "fax_number": "5113470",
-    "email": "testingmotor@gmail.com"
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "kabeng is empty",
+    "status_code": "CDC-200",
+    "status_message": "No data was changed",
     "data": null
 }
 ```
@@ -1027,7 +730,7 @@ DELETE /branches/{id}
 ### Headers
 Key | Value 
 --- | ---
-Content-Type | application/json
+Content-Type | *
 Accept | application/json
 Email | administrator@gmail.com
 
@@ -1036,36 +739,30 @@ No Request Payloads
 
 ### Response Payloads
 HTTP Code | Status | Description
---- | --- | ---
-400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
+--- | --- | --- 
+403 | Forbidden | Branch is not owned by user login
+404 | Not Found | Branch not found in database  
 500 | Internal Server Error | some un-handle error in server 
 204 | No Content | Server request has succeeded but response is no content
 ```
 {
-    "status_code": "CDC-404",
-    "status_message": "Not Found",
+    "status_code": "CDC-403",
+    "status_message": "Branch is not owned by user login",
     "data": null
 }
 ```
 
-```
-{
-    "status_code": "CDC-204",
-    "status_message": "Data Has Been Deleted",
-    "data": null
-}
-```
+Status Code 204 : No Response
 
 ### Logic
 
 #### Endpoint validation
-must be add parameter id and must exist in database
+- must be add parameter id
+- id must exist in database
+- must owned by user login
 
 #### Headers Validation
-- email : user email required and is not empty
-- email : check user email is login or not
-- email : must be top level, like administrator
+No Headers Validation
 
 #### Request Payloads Validation
 No Request Payloads Validation
@@ -1074,67 +771,20 @@ No Request Payloads Validation
 
 #### Case : Negative Case 1
 
-Headers : empty
+Branch is not owned by user login
 
-Response HTTP Status Code : 400
+Response HTTP Status Code : 403
 
 Response Payload :
 ```
 {
-    "status_code": "CDC-400",
-    "status_message": "headers email is required",
+    "status_code": "CDC-403",
+    "status_message": "Branch is not owned by user login",
     "data": null
 }
 ```
 
 #### Case : Negative Case 2
-
-Headers : email is not login
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email is not login",
-    "data": null
-}
-```
-
-#### Case : Negative Case 3
-
-Headers : email must be top level access
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email must be top level access or administrator",
-    "data": null
-}
-```
-
-#### Case : Negative Case 4
-
-- param id is empty
-
-Endpoint : /branches
-
-Response HTTP Status Code : 404
-
-Response Payload :
-```
-{
-    "status_code": "CDC-404",
-    "status_message": "url Not Found, param id is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 5
 
 - param id is not exist in database
 
@@ -1166,14 +816,7 @@ Email | administrator@gmail.com
 
 Response HTTP Status Code : 204
 
-Response Payload :
-```
-{
-    "status_code": "CDC-204",
-    "status_message": "Data Has Been Deleted",
-    "data": null
-}
-```
+Response Payload : No Response
 
 ## <a name="get-all-branches"></a>Get All
 
@@ -1193,13 +836,11 @@ No Request Payloads
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
-400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
 ```
 {
-    "status_code": "CDC-404",
+    "status_code": "CDC-200",
     "status_message": "data not found",
     "data": null
 }
@@ -1247,9 +888,7 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Headers Validation
-- email : user email required and is not empty
-- email : check user email is login or not
-- email : must be top level, like administrator
+No Headers Validation
 
 #### Request Payloads Validation
 No Validation
@@ -1258,59 +897,14 @@ No Validation
 
 #### Case : Negative Case 1
 
-Headers : empty
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 2
-
-Headers : email is not login
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email is not login",
-    "data": null
-}
-```
-
-#### Case : Negative Case 3
-
-Headers : email must be top level access
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email must be top level access or administrator",
-    "data": null
-}
-```
-
-#### Case : Negative Case 4
-
 Data in database is empty
 
-Response HTTP Status Code : 404
+Response HTTP Status Code : 200
 
 Response Payload :
 ```
 {
-    "status_code": "CDC-404",
+    "status_code": "CDC-200",
     "status_message": "data not found",
     "data": null
 }
@@ -1384,15 +978,14 @@ No Request Payloads
 
 ### Response Payloads
 HTTP Code | Status | Description
---- | --- | ---
-400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
+--- | --- | ---  
+403 | Forbidden | Branch is not owned by user login 
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
 ```
 {
-    "status_code": "CDC-404",
-    "status_message": "Not Found",
+    "status_code": "CDC-403",
+    "status_message": "Branch is not owned by user login",
     "data": null
 }
 ```
@@ -1422,12 +1015,12 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Endpoint Validation
-must be add parameter id and must exist in database
+- must be add parameter id
+- id must exist in database
+- must owned by user login
 
 #### Headers Validation
-- email : user email required and is not empty
-- email : check user email is login or not
-- email : must be top level, like administrator
+No Headers Validation
 
 #### Request Payloads Validation
 No Request Payloads Validation
@@ -1436,61 +1029,31 @@ No Request Payloads Validation
 
 #### Case : Negative Case 1
 
-Headers : empty
+Branch is not owned by user login
 
-Response HTTP Status Code : 400
+Response HTTP Status Code : 403
 
 Response Payload :
 ```
 {
-    "status_code": "CDC-400",
-    "status_message": "headers email is required",
+    "status_code": "CDC-403",
+    "status_message": "Branch is not owned by user login",
     "data": null
 }
 ```
 
 #### Case : Negative Case 2
 
-Headers : email is not login
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email is not login",
-    "data": null
-}
-```
-
-#### Case : Negative Case 3
-
-Headers : email must be top level access
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email must be top level access or administrator",
-    "data": null
-}
-```
-
-#### Case : Negative Case 4
-
 - id not exist in database
 
 Endpoint : /branches/359ed520-346f-11eb-adc1-0242ac120112
 
-Response HTTP Status Code : 404
+Response HTTP Status Code : 200
 
 Response Payload :
 ```
 {
-    "status_code": "CDC-404",
+    "status_code": "CDC-200",
     "status_message": "data not found",
     "data": null
 }
@@ -1551,15 +1114,13 @@ No Request Payloads
 
 ### Response Payloads
 HTTP Code | Status | Description
---- | --- | ---
-400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
+--- | --- | --- 
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
 ```
 {
-    "status_code": "CDC-404",
-    "status_message": "Not Found",
+    "status_code": "CDC-500",
+    "status_message": "internal server error",
     "data": null
 }
 ```
@@ -1589,12 +1150,12 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Endpoint Validation
-must be add parameter branch code and must exist in database
+- must be add parameter branch code
+- branch code must exist in database
+- must owned by user login
 
 #### Headers Validation
-- email : user email required and is not empty
-- email : check user email is login or not
-- email : must be top level, like administrator
+No Headers Validation
 
 #### Request Payloads Validation
 No Request Payloads Validation
@@ -1603,78 +1164,31 @@ No Request Payloads Validation
 
 #### Case : Negative Case 1
 
-Headers : empty
+Data in database is empty
 
-Response HTTP Status Code : 400
+Response HTTP Status Code : 200
 
 Response Payload :
 ```
 {
-    "status_code": "CDC-400",
-    "status_message": "headers email is required",
+    "status_code": "CDC-200",
+    "status_message": "data not found",
     "data": null
 }
 ```
 
 #### Case : Negative Case 2
 
-Headers : email is not login
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email is not login",
-    "data": null
-}
-```
-
-#### Case : Negative Case 3
-
-Headers : email must be top level access
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "headers email must be top level access or administrator",
-    "data": null
-}
-```
-
-#### Case : Negative Case 4
-
-- param branch code is empty
-
-Endpoint : /branches/code/
-
-Response HTTP Status Code : 404
-
-Response Payload :
-```
-{
-    "status_code": "CDC-404",
-    "status_message": "url Not Found, param branch code is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 5
-
 - branch code not exist in database
 
 Endpoint : /branches/code/32450
 
-Response HTTP Status Code : 404
+Response HTTP Status Code : 200
 
 Response Payload :
 ```
 {
-    "status_code": "CDC-404",
+    "status_code": "CDC-200",
     "status_message": "data not found",
     "data": null
 }
