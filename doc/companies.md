@@ -53,7 +53,6 @@ HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | Bad request payload  
 500 | Internal Server Error | some un-handle error in server
-200 | OK | OK
 201 | Created | Created
 ```
 {
@@ -68,7 +67,7 @@ HTTP Code | Status | Description
     "status_code": "CDC-201",
     "status_message": "Created",
     "data": {
-        "id":"5",
+        "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
         "company_code": "TC",
         "name": "Test Company",
         "address": "JL. Test Company",
@@ -361,7 +360,7 @@ Request Payload :
 }
 ```
 
-Response HTTP Status Code : 200
+Response HTTP Status Code : 201
 
 Response Payload :
 ```
@@ -369,7 +368,7 @@ Response Payload :
     "status_code": "CDC-201",
     "status_message": "Created",
     "data": {
-        "id":"5",
+        "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
         "company_code": "TC",
         "name": "Test Company",
         "address": "JL. Test Company",
@@ -406,7 +405,7 @@ HTTP Code | Status | Description
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": {
-        "id":"5",
+        "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
         "company_code": "TC",
         "name": "Test Company",
         "address": "JL. Test Company",
@@ -433,7 +432,7 @@ Response Payload :
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": {
-      "id":"5",
+      "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
       "company_code": "TC",
       "name": "Test Company",
       "address": "JL. Test Company",
@@ -507,7 +506,7 @@ HTTP Code | Status | Description
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": {
-        "id":"5",
+        "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
         "company_code": "TC",
         "name": "Test Company",
         "address": "JL. Test Company",
@@ -713,7 +712,7 @@ Response Payload :
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": {
-        "id":"5",
+        "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
         "company_code": "TCC",
         "name": "Test Company",
         "address": "JL. Test Company",
@@ -745,7 +744,7 @@ Response Payload :
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": {
-        "id":"5",
+        "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
         "company_code": "TCC",
         "name": "Test Company Center",
         "address": "JL. Test Company",
@@ -777,7 +776,7 @@ Response Payload :
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": {
-        "id":"5",
+        "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
         "company_code": "TCC",
         "name": "Test Company Center",
         "address": "JL. Test Company Center",
@@ -809,7 +808,7 @@ Response Payload :
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": {
-        "id":"5",
+        "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
         "company_code": "TCC",
         "name": "Test Company Center",
         "address": "JL. Test Company Center",
@@ -841,7 +840,7 @@ Response Payload :
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": {
-        "id":"5",
+        "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
         "company_code": "TCC",
         "name": "Test Company Center",
         "address": "JL. Test Company Center",
@@ -873,31 +872,7 @@ HTTP Code | Status | Description
 400 | Bad Request | Bad request payload  
 404 | Not Found | Companies not found in database  
 500 | Internal Server Error | some un-handle error in server
-200 | OK | OK
 204 | No Content | No Content
-```
-{
-    "status_code": "CDC-400",
-    "status_message": "Bad Request",
-    "data": null
-}
-```
-
-```
-{
-    "status_code": "CDC-204",
-    "status_message": "No Content",
-    "data": null
-}
-```
-
-```
-{
-    "status_code": "CDC-200",
-    "status_message": "OK",
-    "data": null
-}
-```
 
 ### Scenario Test
 
