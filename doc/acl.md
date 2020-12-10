@@ -1,12 +1,15 @@
 # ACL Module
 Module | HTTP Method | URL | Description 
 --- | --- | --- | ---
-[Add](#add) | POST | /add | Add ACL
-[View](#view) | GET | /view/id | View Acl
-[Edit](#edit) | PUT | /edit/id | Edit ACL
-[Delete](#delete) | DELETE | /delete/id | Delete Acl
+[List] | GET | /access | Get All List Access
+[Add] | POST | /access | Add New Record to Acos
+[View] | GET | /access/:id | View detail Acos by id
+[Edit] | PUT | /access/:id | Edit Existing record in Acos by id
+[Delete] | DELETE | /access/:id | Delete Existing record in Acos by id
+[Grant] | POST | /access/grant/:id | insert new record in aros_acos. aco_id in path url. aro_id grab from header email
+[Revoke] | POST | /access/revoke/:id | remove existing record in aros_acos. aco_id in path url. aro_id grab from header email.
 
-## <a name="login"></a>Login
+## <a name="add"></a>Login
 
 ### Endpoint 
 POST /add
@@ -14,7 +17,6 @@ POST /add
 ### Database
 ![](./acl_model.png)
 
-For login, you need get users by username and password (see users table). And for access response payload, you need get acos data which grant to users.
 
 *if need create new database, please write the sql script below* 
 
@@ -23,35 +25,18 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
+Email | application/json
 
 
 ### Request Payloads
 Name | Type | Example Value
 --- | --- | ---
-model | string | Groups 
-foreign_key | int | 2 
-lft | int | 1 
-right | int | 1 
-acos_id | int | 1  
-_create | int| 1
-_read | int| 1
-_update | int| 1
-_delete | int| 1
+parent_id | int | 1 
+alias | int | Groups
 ```
 {
-    "model" : "Groups",
-    "foreign_key" : 2,
-    "lft" : 1,
-    "right" : 1,
-    "acos" : [
-        {
-            "id" : 1,
-            "_create" : 1,
-            "_read" : 1,
-            "_update" : 1,
-            "_delete" : 1
-        }
-    ]
+    "parent_id" : 1,
+    "alias" : "Groups",
 }
 ```
 
@@ -94,9 +79,8 @@ HTTP Code | Status | Description
 ### Logic
 
 #### Validation
-- model : required and not empty
-- foreign_key: required and not empty
-- acos_id: required and not empty
+- parent_id: required and not empty
+- alias: required and not empty
 
 *if any special logic, please write down the logic here. thanks*
 
@@ -112,7 +96,7 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "model is required",
+    "status_message": "parent_id is required",
     "data": null
 }
 ```
@@ -130,7 +114,7 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "model is required",
+    "status_message": "parent_id is required",
     "data": null
 }
 ```
@@ -140,7 +124,7 @@ Response Payload :
 Request payload :
 ```
 {
-    "model": ""
+    "parent_id": ""
 }
 ```
 
@@ -150,7 +134,7 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "model is empty",
+    "status_message": "Parent_id is empty",
     "data": null
 }
 ```
@@ -160,7 +144,7 @@ Response Payload :
 Request Payload :
 ```
 {
-    "model": "Groups"
+    "parent_id": 1
 }
 ```
 
@@ -170,7 +154,7 @@ Response Payload :
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "foreign_key is required",
+    "status_message": "alias is required",
     "data": null
 }
 ```
@@ -180,8 +164,8 @@ Response Payload :
 Request Payload :
 ```
 {
-    "model": "Groups",
-    "foreign_key": ""
+    "parent_id": 1,
+    "alias": ""
 }
 ```
  
@@ -191,70 +175,20 @@ Response Payload:
 ```
 {
     "status_code": "cdc-400",
-    "status_message": "Foreign Key is empty",
+    "status_message": " alias is empty",
     "data": null
 }
 ```
 
-#### Case : Negative Case 6
 
-Request Payload
-```
-{
-    "model": "Groups",
-    "foreign_key": 1
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload
-```
-{
-    "status_code": "cdc-400",
-    "status_message": " Acos ID is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 7
-
-Request Payload
-```
-{
-    "model": "Groups",
-    "foreign_key": 1,
-    "acos" : [
-        {
-            "id" : ""
-        }
-    ]
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload
-```
-{
-    "status_code": "cdc-400",
-    "status_message": " Acos ID is empty",
-    "data": null
-}
-```
 
 #### Case : Positive Case
 
 Request Payload :
 ```
 {
-    "model": "Groups",
-    "foreign_key": 1,
-    "acos" : [
-        {
-            "id" : ""
-        }
-    ]
+    "parent_id": 1,
+    "alias": Groups
 
 }
 ```
@@ -267,14 +201,15 @@ Response Payload :
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": {
-        "model": "Groups",
+        "parent_id": 1,
+        "alias": "Groups",
         "acos": [
             {
                 "id": 1,
-                "_create" : 0,
-                "_read" : 0,
-                "_update" : 0,
-                "_delete" : 0
+                "_create" : 1,
+                "_read" : 1,
+                "_update" : 1,
+                "_delete" : 1,
                 "created": "2020-10-28T08:58:13+00:00",
                 "modified": "2020-10-28T08:58:13+00:00"
             }
@@ -286,7 +221,7 @@ Response Payload :
 ## <a name="index"></a>Index
 
 ### Endpoint
-GET /acl
+GET /access
 
 ## <a name="view"></a>View
 
