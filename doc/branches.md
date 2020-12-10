@@ -638,40 +638,7 @@ Response Payload :
 }
 ```
 
-#### Case : Negative Case 3
-
-Request Payload : empty
-
-Response HTTP Status Code : 200
-
-Response Payload :
-```
-{
-    "status_code": "CDC-200",
-    "status_message": "No data was changed",
-    "data": null
-}
-```
-
-#### Case : Negative Case 4
-
-Request Payload :
-```
-{}
-```
-
-Response HTTP Status Code : 200
-
-Response Payload :
-```
-{
-    "status_code": "CDC-200",
-    "status_message": "No data was changed",
-    "data": null
-}
-```
-
-#### Case : Positive Case
+#### Case : Positive Case 1
 
 - param id is exist in database
 
@@ -712,6 +679,67 @@ Response Payload :
         "address": "Jl. Kebahagiaan No.7",
         "pic": "Rendi",
         "kabeng": "Rojak",
+        "kelurahan": "Palmerah",
+        "kecamatan": "Palmerah",
+        "kab_kota": "Jakarta Barat",
+        "phone_number": "5367896",
+        "fax_number": "5113470",
+        "email": "testingmotor@gmail.com"
+    }
+}
+```
+
+#### Case : Positive Case 2
+
+Request Payload : empty
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "No data was changed",
+    "data": {
+        "id": "359ed520-346f-11eb-adc1-0242ac120002",
+        "branch_code": "12345",
+        "company_code": "TES",
+        "branch_name": "Testing Jaya Motor",
+        "address": "Jl. Kebahagiaan 7",
+        "pic": "Budi",
+        "kabeng": "Ridwan",
+        "kelurahan": "Palmerah",
+        "kecamatan": "Palmerah",
+        "kab_kota": "Jakarta Barat",
+        "phone_number": "5367896",
+        "fax_number": "5113470",
+        "email": "testingmotor@gmail.com"
+    }
+}
+```
+
+#### Case : Positive Case 3
+
+Request Payload :
+```
+{}
+```
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "No data was changed",
+    "data": {
+        "id": "359ed520-346f-11eb-adc1-0242ac120002",
+        "branch_code": "12345",
+        "company_code": "TES",
+        "branch_name": "Testing Jaya Motor",
+        "address": "Jl. Kebahagiaan 7",
+        "pic": "Budi",
+        "kabeng": "Ridwan",
         "kelurahan": "Palmerah",
         "kecamatan": "Palmerah",
         "kab_kota": "Jakarta Barat",
@@ -830,6 +858,9 @@ Content-Type | application/json
 Accept | application/json
 Email | administrator@gmail.com
 
+### Request Param
+GET /branches?keyword="testing"&page=1&limit=20&order=branches.id&sort=desc
+
 ### Request Payloads
 No Request Payloads
 
@@ -842,7 +873,7 @@ HTTP Code | Status | Description
 {
     "status_code": "CDC-200",
     "status_message": "data not found",
-    "data": null
+    "data": []
 }
 ```
 
@@ -906,7 +937,7 @@ Response Payload :
 {
     "status_code": "CDC-200",
     "status_message": "data not found",
-    "data": null
+    "data": []
 }
 ```
 
@@ -1114,7 +1145,9 @@ No Request Payloads
 
 ### Response Payloads
 HTTP Code | Status | Description
---- | --- | --- 
+--- | --- | ---
+403 | Forbidden | Branch is not owned by user login
+404 | Not Found | Branch not found in database
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
 ```
@@ -1166,12 +1199,12 @@ No Request Payloads Validation
 
 Data in database is empty
 
-Response HTTP Status Code : 200
+Response HTTP Status Code : 404
 
 Response Payload :
 ```
 {
-    "status_code": "CDC-200",
+    "status_code": "CDC-404",
     "status_message": "data not found",
     "data": null
 }
@@ -1183,12 +1216,12 @@ Response Payload :
 
 Endpoint : /branches/code/32450
 
-Response HTTP Status Code : 200
+Response HTTP Status Code : 404
 
 Response Payload :
 ```
 {
-    "status_code": "CDC-200",
+    "status_code": "CDC-404",
     "status_message": "data not found",
     "data": null
 }
