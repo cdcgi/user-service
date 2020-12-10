@@ -12,7 +12,7 @@ Module | HTTP Method | URL | Description
 ## <a name="add"></a>Login
 
 ### Endpoint 
-POST /add
+POST /access
 
 ### Database
 ![](./acl_model.png)
@@ -60,7 +60,8 @@ HTTP Code | Status | Description
     "status_code": "CDC-200",
     "status_message": "OK",
      "data": {
-        "model": "Groups",
+        "parent_id": 1,
+        "alias": "Groups",
         "acos": [
             {
                 "id": 1,
@@ -80,7 +81,7 @@ HTTP Code | Status | Description
 
 #### Validation
 - parent_id: required and not empty
-- alias: required and not empty
+- alias: required, not empty and unique
 
 *if any special logic, please write down the logic here. thanks*
 
@@ -226,14 +227,24 @@ GET /access
 ## <a name="view"></a>View
 
 ### Endpoint
-GET /view/id
+GET /access/:id
 
 ## <a name="edit"></a>Edit
 
 ### Endpoint
-POST /edit/id
+POST /access/:id
 
 ## <a name="delete"></a>DELETE
 
 ### Endpoint
-DEL /delete/id
+DEL /access/:id
+
+## <a name="grant"></a>DELETE
+
+### Endpoint
+POST /access/grant/:id
+
+## <a name="revoke"></a>DELETE
+
+### Endpoint
+POST /access/revoke/:id
