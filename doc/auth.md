@@ -76,11 +76,8 @@ HTTP Code | Status | Description
 - password: required and not empty
 
 *if any special logic, please write down the logic here. thanks*
-<<<<<<< HEAD
 
 
-=======
->>>>>>> [#9] add documentation
 
 
 
