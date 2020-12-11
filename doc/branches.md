@@ -859,7 +859,16 @@ Accept | application/json
 Email | administrator@gmail.com
 
 ### Request Param
-GET /branches?keyword="testing"&page=1&limit=20&order=branches.id&sort=desc
+GET /branches?keyword=testing&page=1&limit=20&order=branches.id&sort=desc&company_id=1
+
+Name | Example Value | Description
+--- | --- | ---
+keyword | testing | the keyword for searching branches
+page | 1 | current page in pagination. default value is 1. if there is no param page, page will be set with 1.  
+limit | 20 | the amount of data displayed on current page in pagination. if there is no param limit, it will be set with no limit.
+order | branches.id | grouping data displayed by id of branches. 
+sort | desc | sorting data displayed by desc
+company_id | 1 | conditions of data displayed by id of company
 
 ### Request Payloads
 No Request Payloads
