@@ -1,41 +1,37 @@
 # Groups Module
 Module | HTTP Method | URL | Description 
 --- | --- | --- | ---
-[Add Groups](#add) | POST | /groups-add | Add Groups API
-[Edit Groups](#edit) | PUT | /groups-edit/{id} | Edit Groups API
+[Add Groups](#add) | POST | /groups | Add Groups API
+[Edit Groups](#edit) | PUT | /groups/{id} | Edit Groups API
 [View All Groups](#view) | GET | /groups | View Groups API
-[Delete Groups](#delete) | DELETE | /groups-delete/{id} | Delete Groups API
+[Delete Groups](#delete) | DELETE | /groups/{id} | Delete Groups API
 
 
 ### Database
 ![](./groups-layer.png)
 
-*For [Add Groups](#add) and [Edit Groups](#edit), you need get aros to set aros_id.* 
 
 ## <a name="add"></a>Add Groups
 
 ### Endpoint 
-POST /groups-add
+POST /groups
 
 ### Headers
 Key | Value 
 --- | ---
 Content-Type | application/json
 Accept | application/json
+Email | administrator@mail.com
 
 ### Request Payloads
 Name | Type | Example Value
 --- | --- | ---
 title | string | Admin  
 description | string | Administrator
-aros_id | int | 1
 ```
 {
     "title": "Admin",
-    "description": "Administrator",
-    "aros": {
-      "aros_id": "1"
-    }
+    "description": "Administrator"
 }
 
 ```
@@ -44,7 +40,6 @@ aros_id | int | 1
 HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
 500 | Internal Server Error | some un-handle error in server 
 201 | Created | Created
 ```
@@ -57,15 +52,14 @@ HTTP Code | Status | Description
 
 ```
 {
-    "status_code": "CDC-200",
-    "status_message": "OK",
+    "status_code": "CDC-201",
+    "status_message": "Created",
     "data": {
         "id": "1",
         "title": "Admin",
         "description": "Administrator",
         "created": "2020-12-01 00:00:00",
-        "modified": "2020-12-01 00:00:00",
-        "aros_id": "1"
+        "modified": "2020-12-01 00:00:00"
     }
 } 
 ```
@@ -75,7 +69,6 @@ HTTP Code | Status | Description
 #### Validation
 - title : required and not empty
 - description : required and not empty
-- aros_id : required and not empty
 
 *if any special logic, please write down the logic here. thanks*
 
@@ -175,61 +168,13 @@ Response Payload:
 }
 ```
 
-#### Case : Negative Case 6
-
-Request Payload :
-```
-{
-    "title": "Coba",
-    "description": "Coba coba"
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload:
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "aros_id is required"
-    "data": null
-}
-```
-
-#### Case : Negative Case 7
-
-Request Payload :
-```
-{
-    "title": "Coba",
-    "description": "Coba coba",
-    "aros" : {
-        "aros_id": ""
-    }
-}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload:
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "aros_id is empty"
-    "data": null
-}
-```
 #### Case : Positive Case
 
 Request Payload :
 ```
 {
     "title": "Sales",
-    "description": "Sales Position"
-    "aros": {
-        "aros_id": "2"
-    }
-}
+    "description": "Sales Position"   
 ```
 
 Response HTTP Status Code : 200
@@ -244,8 +189,7 @@ Response Payload :
         "title": "Sales",
         "description": "Sales Position",
         "created": "2020-12-01 00:00:00",
-        "modified": "2020-12-01 00:00:00",
-        "aros_id": "2"
+        "modified": "2020-12-01 00:00:00"
     }
 }
 ```
@@ -253,7 +197,179 @@ Response Payload :
 ## <a name="edit"></a>Edit Groups
 
 ### Endpoint
-PUT /groups-edit/{id}
+PUT /groups/{id}
+
+### Headers
+Key | Value 
+--- | ---
+Content-Type | application/json
+Accept | application/json
+Email | administrator@gmail.com
+
+```
+{
+    "title": "Admin",
+    "description": "Administrator"
+}
+
+```
+
+### Response Payloads
+HTTP Code | Status | Description
+--- | --- | ---
+403 | Forbidden | Groups is not owned by user login
+404 | Not Found | Groups not found in database  
+500 | Internal Server Error | some un-handle error in server 
+200 | OK | OK
+```
+{
+    "status_code": "CDC-403",
+    "status_message": "Groups is not owned by user login",
+    "data": null
+}
+```
+
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "Data Changed",
+    "data": {
+        "id": "1",
+        "title": "Admin",
+        "description": "Administrator",
+        "created": "2020-12-01 00:00:00",
+        "modified": "2020-12-01 00:00:00"
+    }
+} 
+```
+### Logic
+#### Endpoint Validation
+- must be add parameter id
+- id must exist in database
+- must owned by user login
+
+#### Validation
+No Validation
+
+### Scenario Test
+
+#### Case : Negative Case 1
+
+Groups is not owned by user login
+
+Response HTTP Status Code : 403
+
+Response Payload :
+```
+{
+    "status_code": "CDC-403",
+    "status_message": "Groups is not owned by user login",
+    "data": null
+}
+```
+
+#### Case : Negative Case 2
+
+- param id is not exist in database
+
+Endpoint : /groups/100
+
+Response HTTP Status Code : 404
+
+Response Payload :
+```
+{
+    "status_code": "CDC-404",
+    "status_message": "data not found",
+    "data": null
+}
+```
+
+#### Case : Positive Case 1
+
+- param id is exist in database
+
+Endpoint : /groups/1
+
+Headers :
+Key | Value 
+--- | ---
+Content-Type | application/json
+Accept | application/json
+Email | administrator@gmail.com
+
+Request Payload :
+```
+{
+   "title": "myAdmin",
+   "description": "My Administrator"
+}
+```
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "Data Changed",
+    "data": {
+        "id": "1",
+        "title": "myAdmin",
+        "description": "Administrator",
+        "created": "2020-12-01 00:00:00",
+        "modified": "2020-12-11 12:00:00"
+    }
+}
+```
+
+#### Case : Positive Case 2
+
+Request Payload : empty
+
+Endpoint : /groups/1
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "No data was changed",
+    "data": {
+        "id": "1",
+        "title": "myAdmin",
+        "description": "Administrator",
+        "created": "2020-12-01 00:00:00",
+        "modified": "2020-12-11 12:00:00"
+    }
+}
+```
+
+#### Case : Positive Case 3
+
+Request Payload :
+```
+{}
+```
+Endpoint : /groups/1
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "No data was changed",
+    "data": {
+        "id": "1",
+        "title": "myAdmin",
+        "description": "Administrator",
+        "created": "2020-12-01 00:00:00",
+        "modified": "2020-12-11 12:00:00"
+    }
+}
+```
 
 ## <a name="view"></a>View All Groups
 
@@ -263,8 +379,16 @@ GET /groups
 ### Headers
 Key | Value 
 --- | ---
-Content-Type | *
+Content-Type | application/json
 Accept | application/json
+Email | administrator@mail.com
+
+### Request Payloads
+Name | Type | Example Value
+--- | --- | ---
+title | string | Admin  
+description | string | Administrator
+
 
 ### Request Payload
 
@@ -312,4 +436,84 @@ HTTP Code | Status | Description
 ## <a name="delete"></a>Delete Groups
 
 ### Endpoint
-DELETE /groups-delete/{id}
+DELETE /groups/{id}
+
+### Headers
+Key | Value 
+--- | ---
+Content-Type | *
+Accept | application/json
+Email | administrator@mail.com
+
+### Request Payloads
+No request payloads
+
+### Response Payloads
+HTTP Code | Status | Description
+--- | --- | ---
+403 | Forbidden | Groups is not owned by user login
+404 | Not Found | Groups not found in database  
+500 | Internal Server Error | some un-handle error in server 
+204 | No Content | Server request has succeeded but response is no content
+
+```
+{
+    "status_code": "CDC-403",
+    "status_message": "Groups is not owned by user login",
+    "data": null
+}
+```
+Status 204 : No Response
+
+### Logic
+#### Endpoint Validation
+- must be add parameter id
+- id must exist in database
+- must owned by user login
+
+#### Validation
+No Validation
+
+#### Case : Negative Case 1
+- group is not owned by user login
+Response HTTP Status Code : 403
+
+Response Payload :
+```
+{
+    "status_code": "cdc-403",
+    "status_message": "Groups is not owned by user login",
+    "data": null
+}
+```
+
+#### Case : Negative Case 2
+- param id is not exist in database
+
+Endpoint : /groups/100
+
+Response HTTP Status Code : 404
+
+Response Payload:
+```
+{
+    "status_code": "cdc-404",
+    "status_message": "data not found",
+    "data": null
+}
+```
+
+#### Case : Positive Case
+- param id is exist in database
+
+Endpoint : /groups/1
+### Headers
+Key | Value 
+--- | ---
+Content-Type | application/json
+Accept | application/json
+Email | administrator@mail.com
+
+Response HTTP Status Code : 204
+
+Response Payload : No Response
