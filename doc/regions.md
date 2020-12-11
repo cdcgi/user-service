@@ -332,39 +332,6 @@ HTTP Code | Status | Description
 
 #### Case : Negative Case 1
 
-Request Payload : empty
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "region_code is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 2
-
-Request Payload :
-```
-{}
-```
-
-Response HTTP Status Code : 400
-
-Response Payload :
-```
-{
-    "status_code": "cdc-400",
-    "status_message": "region_code is required",
-    "data": null
-}
-```
-
-#### Case : Negative Case 3
-
 Request Payload
 ```
 {
@@ -383,7 +350,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 4
+#### Case : Negative Case 2
 
 Request Payload
 ```
@@ -403,7 +370,7 @@ Response Payload
 }
 ```
 
-#### Case : Negative Case 5
+#### Case : Negative Case 3
 
 Request Payload
 ```
