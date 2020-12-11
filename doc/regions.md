@@ -55,7 +55,6 @@ HTTP Code | Status | Description
         "id":"5e6c4216-360c-11eb-8f39-5600024efe02",
         "region_code" : "AMD",
         "name" : "Auto Moro Dewe",
-        "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
         "modified" : "2020-12-02 09:03:44"
@@ -206,7 +205,6 @@ Response Payload :
         "id":"5e6c4216-360c-11eb-8f39-5600024efe02",
         "region_code" : "AMD",
         "name" : "Auto Moro Dewe",
-        "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
         "modified" : "2020-12-02 09:03:44"
@@ -241,7 +239,6 @@ HTTP Code | Status | Description
         "id":"5e6c4216-360c-11eb-8f39-5600024efe02",
         "region_code" : "AMD",
         "name" : "Auto Moro Dewe",
-        "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
         "modified" : "2020-12-02 09:03:44"
@@ -264,7 +261,6 @@ Response Payload :
         "id":"5e6c4216-360c-11eb-8f39-5600024efe02",
         "region_code" : "AMD",
         "name" : "Auto Moro Dewe",
-        "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
         "modified" : "2020-12-02 09:03:44"
@@ -319,7 +315,6 @@ HTTP Code | Status | Description
         "id":"5e6c4216-360c-11eb-8f39-5600024efe02",
         "region_code" : "MMT",
         "name" : "Monggo Moro Tumbas",
-        "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
         "modified" : "2020-12-02 09:03:44"
@@ -448,7 +443,6 @@ Response Payload :
         "id":"5e6c4216-360c-11eb-8f39-5600024efe02",
         "region_code" : "MMT",
         "name" : "Auto Moro Dewe",
-        "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
         "modified" : "2020-12-02 10:03:44"
@@ -476,7 +470,6 @@ Response Payload :
         "id":"5e6c4216-360c-11eb-8f39-5600024efe02",
         "region_code" : "AMD",
         "name" : "Monggo Moro Tumbas",
-        "company_code" : "BKNINTEL",
         "company_id" : "d58edc03-360c-11eb-8f39-5600024efe02",
         "created" : "2020-12-02 09:03:44",
         "modified" : "2020-12-02 10:03:44"
