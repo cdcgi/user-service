@@ -5,6 +5,7 @@ Module | HTTP Method | URL | Description
 [View](#view) | GET | /companies/:id | View Data Companies
 [Edit](#edit) | PUT | /companies/:id | Edit Data Companies
 [Delete](#delete) | DELETE | /companies/:id | Delete Data Companies
+[ViewList](#viewlist) | GET | /companies | View List Data Companies
 
 ## <a name="add"></a>Add Data Companies
 
@@ -845,3 +846,138 @@ HTTP Code | Status | Description
 #### Case : Positive Case
 
 Response HTTP Status Code : 204
+
+## <a name="viewlist"></a>View List Data Companies
+
+### Endpoint
+GET /companies
+
+### Header
+Key | Value
+--- | ---
+Content-Type | application/json
+Accept | application/json
+
+### Param Query
+Name | Example Value | Deskription
+--- | --- | ---
+search | jawara | keyword for search companies. default is empty.
+page | 1 | current page. default 1.
+limit | 20 | limit data in 1 pages. default 20.
+order | companies.name | order of list. default companies.id
+sort | asc | sort of list. option value is asc
+
+URL : GET /companies?search=jawara&order=companies.name
+
+### Response Payloads
+HTTP Code | Status | Description
+--- | --- | ---
+500 | Internal Server Error | some un-handle error in server
+200 | OK | OK
+```
+{
+  "status_code": "CDC-200",
+  "status_message": "sucsess",
+  "data": {
+    "companies": [],
+    "pagination": {
+      "search": "",
+      "page": 1,
+      "limit": 20,
+      "order": "companies.name",
+      "sort": "desc",
+      "count": 0
+    }
+  }
+}
+```
+
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "OK",
+    "data": {
+      "companies" : [
+        "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
+        "company_code": "TC",
+        "name": "Test Company",
+        "address": "JL. Test Company",
+        "npwp": "123",
+        "nomor_kukuh": "123",
+        "tgl_kukuh": "2020-12-08",
+        "phone_num": "021",
+        "fax_num": "021",
+        "seri_pajak": "12",
+        "kota": "JAKARTA"
+      ],
+      "pagination": {
+        "search": "",
+        "page": 1,
+        "limit": 20,
+        "order": "companies.name",
+        "sort": "desc",
+        "count": 1
+      }
+    }
+}
+```
+
+### Scenario Test
+
+#### Case : Positive Case 1
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+  "status_code": "CDC-200",
+  "status_message": "sucsess",
+  "data": {
+    "companies": [],
+    "pagination": {
+      "search": "",
+      "page": 1,
+      "limit": 20,
+      "order": "companies.name",
+      "sort": "desc",
+      "count": 0
+    }
+  }
+}
+```
+
+#### Case : Positive Case 2
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+  "status_code": "CDC-200",
+  "status_message": "OK",
+  "data": {
+    "companies" : [
+      "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
+      "company_code": "TC",
+      "name": "Test Company",
+      "address": "JL. Test Company",
+      "npwp": "123",
+      "nomor_kukuh": "123",
+      "tgl_kukuh": "2020-12-08",
+      "phone_num": "021",
+      "fax_num": "021",
+      "seri_pajak": "12",
+      "kota": "JAKARTA"
+    ],
+    "pagination": {
+      "search": "",
+      "page": 1,
+      "limit": 20,
+      "order": "companies.name",
+      "sort": "desc",
+      "count": 1
+    }
+  }
+}
+```
