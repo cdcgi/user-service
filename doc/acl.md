@@ -295,7 +295,7 @@ HTTP Code | Status | Description
              {
                 "id":5,
                 "parent_id": 1,
-                "alias": "Delete",
+                "alias": "Edit",
                 "created": "2020-10-28T08:58:13+00:00",
                 "modified": "2020-10-28T08:58:13+00:00"
              },
