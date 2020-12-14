@@ -304,8 +304,8 @@ HTTP Code | Status | Description
 }
 
 ### Logic
-- if there is no email header, you get all acos in tree.
-- if any email header, you get all acos which is grant to user login (you need join to aros_acos table).
+- if there is no email header, it get all acos in tree.
+- if any email header, it get all acos which is grant to user login (you need join to aros_acos table).
 
 ## <a name="view"></a>View
 
