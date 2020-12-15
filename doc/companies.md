@@ -898,17 +898,19 @@ HTTP Code | Status | Description
     "status_message": "OK",
     "data": {
       "companies" : [
-        "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
-        "company_code": "TC",
-        "name": "Test Company",
-        "address": "JL. Test Company",
-        "npwp": "123",
-        "nomor_kukuh": "123",
-        "tgl_kukuh": "2020-12-08",
-        "phone_num": "021",
-        "fax_num": "021",
-        "seri_pajak": "12",
-        "kota": "JAKARTA"
+        {
+          "id":"5e8d6470-f654-24c8-93ac-332e6c3dra2e",
+          "company_code": "TC",
+          "name": "Test Company",
+          "address": "JL. Test Company",
+          "npwp": "123",
+          "nomor_kukuh": "123",
+          "tgl_kukuh": "2020-12-08",
+          "phone_num": "021",
+          "fax_num": "021",
+          "seri_pajak": "12",
+          "kota": "JAKARTA"
+        }
       ],
       "pagination": {
         "search": "",
