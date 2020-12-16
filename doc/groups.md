@@ -21,7 +21,6 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | administrator@mail.com
 
 ### Request Payloads
 Name | Type | Example Value
@@ -204,7 +203,6 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | administrator@gmail.com
 
 ```
 {
@@ -217,18 +215,9 @@ Email | administrator@gmail.com
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
-403 | Forbidden | Groups is not owned by user login
 404 | Not Found | Groups not found in database  
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
-```
-{
-    "status_code": "CDC-403",
-    "status_message": "Groups is not owned by user login",
-    "data": null
-}
-```
-
 ```
 {
     "status_code": "CDC-200",
@@ -246,7 +235,6 @@ HTTP Code | Status | Description
 #### Endpoint Validation
 - must be add parameter id
 - id must exist in database
-- must owned by user login
 
 #### Validation
 No Validation
@@ -254,22 +242,6 @@ No Validation
 ### Scenario Test
 
 #### Case : Negative Case 1
-
-Groups is not owned by user login
-
-Response HTTP Status Code : 403
-
-Response Payload :
-```
-{
-    "status_code": "CDC-403",
-    "status_message": "Groups is not owned by user login",
-    "data": null
-}
-```
-
-#### Case : Negative Case 2
-
 - param id is not exist in database
 
 Endpoint : /groups/100
@@ -296,7 +268,6 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | administrator@gmail.com
 
 Request Payload :
 ```
@@ -381,7 +352,6 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | administrator@mail.com
 
 ### Request Payloads
 Name | Type | Example Value
@@ -443,7 +413,6 @@ Key | Value
 --- | ---
 Content-Type | *
 Accept | application/json
-Email | administrator@mail.com
 
 ### Request Payloads
 No request payloads
@@ -451,43 +420,21 @@ No request payloads
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
-403 | Forbidden | Groups is not owned by user login
 404 | Not Found | Groups not found in database  
 500 | Internal Server Error | some un-handle error in server 
 204 | No Content | Server request has succeeded but response is no content
 
-```
-{
-    "status_code": "CDC-403",
-    "status_message": "Groups is not owned by user login",
-    "data": null
-}
-```
 Status 204 : No Response
 
 ### Logic
 #### Endpoint Validation
 - must be add parameter id
 - id must exist in database
-- must owned by user login
 
 #### Validation
 No Validation
 
 #### Case : Negative Case 1
-- group is not owned by user login
-Response HTTP Status Code : 403
-
-Response Payload :
-```
-{
-    "status_code": "cdc-403",
-    "status_message": "Groups is not owned by user login",
-    "data": null
-}
-```
-
-#### Case : Negative Case 2
 - param id is not exist in database
 
 Endpoint : /groups/100
@@ -512,7 +459,6 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | administrator@mail.com
 
 Response HTTP Status Code : 204
 
