@@ -22,7 +22,6 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | cdc_user@gmail.com
 
 
 ### Request Payloads
@@ -67,7 +66,7 @@ HTTP Code | Status | Description
 ```
 
 ### Logic
- using <a href="https://book.cakephp.org/4/en/orm/behaviors/tree.html" rel="notfollow">cakephp tree</a> behavior to get lft and rght from parent_id
+ using [cakephp tree](https://book.cakephp.org/4/en/orm/behaviors/tree.html) behavior to get lft and rght from parent_id
 
 #### Validation
 - parent_id: required and not empty
@@ -382,7 +381,6 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | cdc_user@gmail.com
 
 ### Response Payloads
 HTTP Code | Status | Description
@@ -500,7 +498,6 @@ Key | Value
 --- | ---
 Content-Type | application/json
 Accept | application/json
-Email | cdc_user@gmail.com
 
 ### Request Payloads
 Name | Type | Example Value
@@ -543,7 +540,7 @@ HTTP Code | Status | Description
 ```
 
 ### Logic
- using <a href="https://book.cakephp.org/4/en/orm/behaviors/tree.html" rel="notfollow">cakephp tree</a> behavior to get lft and rght from parent_id
+ using [cakephp tree](https://book.cakephp.org/4/en/orm/behaviors/tree.html) behavior to get lft and rght from parent_id
 
 #### Validation
 - parent_id: required and not empty
@@ -724,7 +721,6 @@ Key | Value
 --- | ---
 Content-Type |*
 Accept | application/json
-Email | cdc_user@gmail.com
 
 ### Response Payloads
 HTTP Code | Status | Description
@@ -732,12 +728,13 @@ HTTP Code | Status | Description
 403 | Forbidden | Can not be deleted  
 404 | Not Found | User not found in database  
 500 | Internal Server Error | some un-handle error in server 
-200 | OK | OK
+204 | No Content | No Content
 
 ### Logic
 - root can not be deleted. 
 - root alias is 'controllers'. 
 - root parent_id is null.
+- if the node has children, it should not be deleted
 
 ### Scenario Test
 
@@ -756,7 +753,161 @@ Response HTTP Status Code : 204
 ### Endpoint
 POST /access/grant/:id
 
+### Headers
+Key | Value 
+--- | ---
+Content-Type | application/json
+Accept | application/json
+Email | cdc_user@cdcmail.com
+
+### Response Payloads
+HTTP Code | Status | Description
+--- | --- | ---
+400 | Bad Request | Bad request payload  
+404 | Not Found | User not found in database  
+500 | Internal Server Error | some un-handle error in server 
+200 | OK | OK
+
+```
+{
+    "status_code": "CDC-400",
+    "status_message": "Bad Request",
+    "data": null
+}
+```
+
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "OK",
+     "data": {
+        "id":1,
+        "aco_id": 1,
+        "aro_id": 1,
+        "created": "2020-10-28T08:58:13+00:00",
+        "modified": "2020-10-28T08:58:13+00:00"
+    }
+}
+```
+
+### Logic
+- aro_id grab from header email.
+
+### Scenario Test
+
+#### Case : Negative Case 1
+
+Response HTTP Status Code : 404
+
+Response Payload :
+```
+{
+    "status_code": "cdc-404",
+    "status_message": "id not found in acos table",
+    "data": null
+}
+```
+
+#### Case : Negative Case 2
+
+Response HTTP Status Code : 400
+
+Response Payload :
+```
+{
+    "status_code": "cdc-404",
+    "status_message": "access already exist for this user",
+    "data": null
+}
+```
+#### Case : Positive Case
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "OK",
+     "data": {
+        "id":1,
+        "aco_id": 1,
+        "aro_id": 1,
+        "created": "2020-10-28T08:58:13+00:00",
+        "modified": "2020-10-28T08:58:13+00:00"
+    }
+}
+```
+
 ## <a name="revoke"></a>REVOKE
 
 ### Endpoint
 POST /access/revoke/:id
+
+### Headers
+Key | Value 
+--- | ---
+Content-Type | application/json
+Accept | application/json
+Email | cdc_user@cdcmail.com
+
+### Response Payloads
+HTTP Code | Status | Description
+--- | --- | ---
+400 | Bad Request | Bad request payload  
+404 | Not Found | User not found in database  
+500 | Internal Server Error | some un-handle error in server 
+200 | OK | OK
+
+```
+{
+    "status_code": "CDC-400",
+    "status_message": "Bad Request",
+    "data": null
+}
+```
+
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "OK",
+     "data": {
+        "id":1,
+        "aco_id": 1,
+        "aro_id": 1,
+        "created": "2020-10-28T08:58:13+00:00",
+        "modified": "2020-10-28T08:58:13+00:00"
+    }
+}
+```
+
+### Logic
+- aro_id grab from header email.
+
+### Scenario Test
+
+#### Case : Negative Case 
+
+Response HTTP Status Code : 404
+
+Response Payload :
+```
+{
+    "status_code": "cdc-404",
+    "status_message": "access not found for this user",
+    "data": null
+}
+```
+#### Case : Positive Case
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "Access Revoked",
+    "data": null
+}
+```
+
