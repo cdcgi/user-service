@@ -765,6 +765,7 @@ HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | Bad request payload  
 404 | Not Found | User not found in database  
+409 | Already Exist | Access Already Exist  
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
 
@@ -810,12 +811,12 @@ Response Payload :
 
 #### Case : Negative Case 2
 
-Response HTTP Status Code : 400
+Response HTTP Status Code : 409
 
 Response Payload :
 ```
 {
-    "status_code": "cdc-404",
+    "status_code": "cdc-409",
     "status_message": "access already exist for this user",
     "data": null
 }
