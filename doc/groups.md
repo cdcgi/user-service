@@ -4,6 +4,7 @@ Module | HTTP Method | URL | Description
 [Add Groups](#add) | POST | /groups | Add Groups API
 [Edit Groups](#edit) | PUT | /groups/{id} | Edit Groups API
 [View All Groups](#view) | GET | /groups | View Groups API
+[View Groups Detail](#view-detail) | GET | /groups/{id} | View Detail Group API
 [Delete Groups](#delete) | DELETE | /groups/{id} | Delete Groups API
 
 
@@ -54,7 +55,7 @@ HTTP Code | Status | Description
     "status_code": "CDC-201",
     "status_message": "Created",
     "data": {
-        "id": "1",
+        "id": 1,
         "title": "Admin",
         "description": "Administrator",
         "created": "2020-12-01 00:00:00",
@@ -184,7 +185,7 @@ Response Payload :
     "status_code": "CDC-200",
     "status_message": "OK",
     "data": {
-        "id": "2",
+        "id": 2,
         "title": "Sales",
         "description": "Sales Position",
         "created": "2020-12-01 00:00:00",
@@ -223,7 +224,7 @@ HTTP Code | Status | Description
     "status_code": "CDC-200",
     "status_message": "Data Changed",
     "data": {
-        "id": "1",
+        "id": 1,
         "title": "Admin",
         "description": "Administrator",
         "created": "2020-12-01 00:00:00",
@@ -285,7 +286,7 @@ Response Payload :
     "status_code": "CDC-200",
     "status_message": "Data Changed",
     "data": {
-        "id": "1",
+        "id": 1,
         "title": "myAdmin",
         "description": "Administrator",
         "created": "2020-12-01 00:00:00",
@@ -308,7 +309,7 @@ Response Payload :
     "status_code": "CDC-200",
     "status_message": "No data was changed",
     "data": {
-        "id": "1",
+        "id": 1,
         "title": "myAdmin",
         "description": "Administrator",
         "created": "2020-12-01 00:00:00",
@@ -333,7 +334,7 @@ Response Payload :
     "status_code": "CDC-200",
     "status_message": "No data was changed",
     "data": {
-        "id": "1",
+        "id": 1,
         "title": "myAdmin",
         "description": "Administrator",
         "created": "2020-12-01 00:00:00",
@@ -353,12 +354,16 @@ Key | Value
 Content-Type | application/json
 Accept | application/json
 
-### Request Payloads
-Name | Type | Example Value
+### Request Param
+Name | Example Value | Description
 --- | --- | ---
-title | string | Admin  
-description | string | Administrator
+search | admin | keyword for search groups. default is empty.
+page | 1 | current page. default 1.  
+limit | 20 | limit data in 1 pages. default 20.
+order | groups.title	 | order of list. default groups.id 
+sort | asc | sort of list. option value is asc
 
+EXAMPLE URL : GET /groups?search=admin&order=groups.title
 
 ### Request Payload
 
@@ -368,7 +373,7 @@ No Request Payload
 HTTP Code | Status | Description
 --- | --- | ---
 400 | Bad Request | Bad request payload  
-404 | Not Found | User not found in database  
+404 | Not Found | Groups not found in database  
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
 ```
@@ -385,20 +390,126 @@ HTTP Code | Status | Description
     "status_message": "OK",
     "data": [
       {
-        "id": "1",
+        "id": 1,
         "title": "Admin",
         "description": "Administrator",
         "created": "2020-12-01 00:00:00",
         "modified": "2020-12-01 00:00:00",
-        "aros_id": "1"
+        "aros_id": 1
       },
       {
-        "id": "2",
+        "id": 2,
         "title": "Sales",
         "description": "Sales Admin",
         "created": "2020-12-01 00:00:00",
         "modified": "2020-12-01 00:00:00",
-        "aros_id": "2"
+        "aros_id": 2
+      }
+} 
+```
+## <a name="view-detail"></a>View Detail Groups by id
+
+### Endpoint
+GET /groups/{id}
+
+### Headers
+Key | Value 
+--- | ---
+Content-Type | application/json
+Accept | application/json
+
+### Request Payload
+
+No Request Payload
+
+### Response Payloads
+HTTP Code | Status | Description
+--- | --- | ---  
+404 | Not Found | Groups not found in database  
+500 | Internal Server Error | some un-handle error in server 
+200 | OK | OK
+
+```
+{
+    "status_code": "CDC-404",
+    "status_message": "Data not found",
+    "data": null
+}
+```
+
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "OK",
+    "data":
+      {
+        "id": 2,
+        "title": "Sales",
+        "description": "Sales Admin",
+        "created": "2020-12-01 00:00:00",
+        "modified": "2020-12-01 00:00:00",
+        "aros_id": 2
+      }
+} 
+```
+
+### Logic
+
+#### Endpoint Validation
+- must be add parameter id
+- id must exist in database
+
+#### Headers Validation
+No Headers Validation
+
+#### Request Payloads Validation
+No Request Payloads Validation
+
+### Scenario Test
+
+#### Case : Negative Case 1
+- id not exist in database
+
+Endpoint : /groups/100
+
+Response HTTP Status Code : 404
+
+Response Payload :
+```
+{
+    "status_code": "CDC-404",
+    "status_message": "data not found",
+    "data": null
+}
+```
+
+#### Case : Positive Case
+
+- id is exist in database
+
+Endpoint : /groups/2
+
+Headers :
+Key | Value 
+--- | ---
+Content-Type | application/json
+Accept | application/json
+
+Response HTTP Status Code : 200
+
+Response Payload :
+```
+{
+    "status_code": "CDC-200",
+    "status_message": "OK",
+    "data":
+      {
+        "id": 2,
+        "title": "Sales",
+        "description": "Sales Admin",
+        "created": "2020-12-01 00:00:00",
+        "modified": "2020-12-01 00:00:00",
+        "aros_id": 2
       }
 } 
 ```
