@@ -372,14 +372,13 @@ No Request Payload
 ### Response Payloads
 HTTP Code | Status | Description
 --- | --- | ---
-400 | Bad Request | Bad request payload  
 404 | Not Found | Groups not found in database  
 500 | Internal Server Error | some un-handle error in server 
 200 | OK | OK
 ```
 {
-    "status_code": "CDC-400",
-    "status_message": "Bad Request",
+    "status_code": "CDC-500",
+    "status_message": "Internal Server Error",
     "data": null
 }
 ```
@@ -394,16 +393,14 @@ HTTP Code | Status | Description
         "title": "Admin",
         "description": "Administrator",
         "created": "2020-12-01 00:00:00",
-        "modified": "2020-12-01 00:00:00",
-        "aros_id": 1
+        "modified": "2020-12-01 00:00:00"
       },
       {
         "id": 2,
         "title": "Sales",
         "description": "Sales Admin",
         "created": "2020-12-01 00:00:00",
-        "modified": "2020-12-01 00:00:00",
-        "aros_id": 2
+        "modified": "2020-12-01 00:00:00"
       }
 } 
 ```
