@@ -70,7 +70,15 @@ HTTP Code | Status | Description
 - title : required and not empty
 - description : required and not empty
 
-*if any special logic, please write down the logic here. thanks*
+#### Special Logic
+*After save data in groups table, also save the data on aros table too*
+- id          --> auto increment
+- parent_id   --> null
+- model       --> Groups
+- foreign_key --> id of group
+- alias       --> name of group
+- lft         --> grab using cakephp tree behavior
+- rght        --> grab using cakephp tree behavior
 
 ### Scenario Test
 
@@ -542,6 +550,10 @@ Status 204 : No Response
 #### Validation
 No Validation
 
+#### Special Logic
+*After delete group also delete aros where model = Groups and foreign_key = id of group*
+
+### Scenario Test
 #### Case : Negative Case 1
 - param id is not exist in database
 
